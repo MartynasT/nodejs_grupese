@@ -1,4 +1,3 @@
-
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
@@ -17,11 +16,6 @@ const signUp = async (req, res) => {
     console.log(e);
     res.status(400).send(e);
   }
-};
-
-const getAllUsers = async (req, res) => {
-  const allUsers = await User.find();
-  res.send(allUsers);
 };
 
 const signIn = async (req, res) => {
@@ -47,16 +41,10 @@ const signIn = async (req, res) => {
 
     await session.save();
 
-
     res.header("eventauth", token).send(user);
-
   } catch (e) {
     res.status(400).send(e);
   }
-};
-
-const currentUser = (req, res) => {
-  res.send(req.user);
 };
 
 const logOut = async (req, res) => {
@@ -73,20 +61,8 @@ const logOut = async (req, res) => {
   }
 };
 
-const updateUserInfo = async (req, res) => {
-  let user = req.user;
-  if (req.file) {
-    user.profileImage = req.file.path;
-    await user.save();
-  }
-  res.send(user);
-};
-
 module.exports = {
   signUp,
   signIn,
-  currentUser,
   logOut,
-  getAllUsers,
-  updateUserInfo,
 };
