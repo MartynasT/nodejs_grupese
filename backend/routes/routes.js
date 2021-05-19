@@ -22,7 +22,7 @@ const upload = multer({
 
 // Events
 router.route('/event')
-  .post(authenticateMiddleware.authenticate, tweetController.createEvent)
+  .post(authenticateMiddleware.authenticate, eventController.createEvent)
   .get(eventController.getAllEvents)
 
 // user
@@ -31,9 +31,9 @@ router.route('/user/signIn').post(userController.signIn)
 router.route('/user/logOut').post(authenticateMiddleware.authenticate, userController.logOut)
 
 // organizator
-router.route('/organizator/signUp').post(userController.signUp)
-router.route('/organizator/signIn').post(userController.signIn)
-router.route('/organizator/logOut').post(authenticateMiddleware.authenticate, userController.logOut)
+router.route('/organizator/signUp').post(organizatorController.signUp)
+router.route('/organizator/signIn').post(organizatorController.signIn)
+router.route('/organizator/logOut').post(organizatorMiddleware.authenticate, userController.logOut)
 
 
 
