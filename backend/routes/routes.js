@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const multer = require('multer')
 
-const tweetController = require('../controllers/tweetController')
+const eventController = require('../controllers/eventController')
 const userController = require('../controllers/userController')
+const organizatorController = require('../controllers/organizatorController')
 const authenticateMiddleware = require('../middleware/authenticate')
 
 
@@ -21,21 +22,18 @@ const upload = multer({
 
 // Events
 router.route('/event')
-  .post(authenticateMiddleware.authenticate, tweetController.createTweet)
-  .get(tweetController.getTweets)
-router.route('/tweet/like')
-  .post(tweetController.likeTweet)
-router.route('/myTweets')
-  .get(authenticateMiddleware.authenticate, tweetController.getMyTweets)
-
+  .post(authenticateMiddleware.authenticate, eventController.createEvent)
+  .get(eventController.getAllEvents)
 
 // user
 router.route('/user/signUp').post(userController.signUp)
 router.route('/user/signIn').post(userController.signIn)
-router.route('/user/currentUser').get(authenticateMiddleware.authenticate, userController.currentUser)
 router.route('/user/logOut').post(authenticateMiddleware.authenticate, userController.logOut)
-router.route('/user/getAllUsers').get(userController.getAllUsers)
-router.route('/user/updateUserInfo').post(authenticateMiddleware.authenticate, upload.single('avatar'), userController.updateUserInfo)
+
+// organizator
+router.route('/organizator/signUp').post(organizatorController.signUp)
+router.route('/organizator/signIn').post(organizatorController.signIn)
+router.route('/organizator/logOut').post(organizatorMiddleware.authenticate, organizatorController.logOut)
 
 
 
