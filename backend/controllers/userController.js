@@ -1,4 +1,4 @@
-//
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
@@ -47,7 +47,9 @@ const signIn = async (req, res) => {
 
     await session.save();
 
+
     res.header("eventauth", token).send(user);
+
   } catch (e) {
     res.status(400).send(e);
   }
