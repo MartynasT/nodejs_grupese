@@ -1,5 +1,11 @@
-const router = require("express").Router();
-const multer = require("multer");
+const router = require('express').Router();
+const multer = require('multer')
+
+const eventController = require('../controllers/eventController')
+const userController = require('../controllers/userController')
+const organizatorController = require('../controllers/organizatorController')
+const authenticateMiddleware = require('../middleware/authentication')
+
 
 const eventController = require("../controllers/eventController");
 const userController = require("../controllers/userController");
@@ -33,10 +39,10 @@ router
   .post(authenticateMiddleware.authenticate, userController.logOut);
 
 // organizator
-router.route("/organizator/signUp").post(organizatorController.signUp);
-router.route("/organizator/signIn").post(organizatorController.signIn);
-router
-  .route("/organizator/logOut")
-  .post(organizatorMiddleware.authenticate, organizatorController.logOut);
+
+router.route('/organizator/signUp').post(organizatorController.signUp)
+router.route('/organizator/signIn').post(organizatorController.signIn)
+router.route('/organizator/logOut').post(authenticateMiddleware.authenticate, organizatorController.logOut)
+
 
 module.exports = router;
