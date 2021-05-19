@@ -4,6 +4,7 @@ const User = require("../models/userModel");
 const Session = require("../models/sessionModel");
 
 const signUp = async (req, res) => {
+  console.log(req.body);
   try {
     const user = new User({
       email: req.body.email,
