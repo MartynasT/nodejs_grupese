@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
-const userSchema = new mongoose.Schema({
+const OrganizatorSchema = new mongoose.Schema({
   organization: {
       type: String,
       required: true,
@@ -24,19 +24,19 @@ const userSchema = new mongoose.Schema({
 })
 
 
-userSchema.pre('save', function(next) {
+OrganizatorSchema.pre('save', function(next) {
   
-  let user = this
-  if (user.isModified('password')) {
+  let organizator = this
+  if (organizator.isModified('password')) {
     
-    let hash = bcrypt.hashSync(user.password, 10)
-    user.password = hash
+    let hash = bcrypt.hashSync(organizator.password, 10)
+    organizator.password = hash
     next()
   } else {
     next()
   }
 })
 
-const User = mongoose.model('User', userSchema)
+const Organizator = mongoose.model('Organizator', OrganizatorSchema)
 
-module.exports = User
+module.exports = Organizator
