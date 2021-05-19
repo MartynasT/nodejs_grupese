@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+console.log("labas")
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
