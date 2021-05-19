@@ -7,34 +7,22 @@ const Session = require("../models/sessionModel");
 
 const signUp = async (req, res) => {
   try {
-
     const org = new Org({
-
-
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
     });
 
-
     let newOrg = await org.save();
     res.send(newOrg);
-
   } catch (e) {
     console.log(e);
     res.status(400).send(e);
   }
 };
 
-const getAllOrgs = async (req, res) => {
-  const allOrgs = await Org.find();
-  res.send(allOrgs);
-
-};
-
 const signIn = async (req, res) => {
   try {
-
     let org = await Org.findOne({ email: req.body.email });
     if (!org) throw { message: "Wrong email" };
 
@@ -44,10 +32,8 @@ const signIn = async (req, res) => {
 
     let token = jwt.sign(
       {
-
         id: org._id,
         role: "organizator",
-
       },
       process.env.JWT_PASSWORD
     );
@@ -59,19 +45,10 @@ const signIn = async (req, res) => {
 
     await session.save();
 
-
     res.header("eventauth", token).send(org);
-
   } catch (e) {
     res.status(400).send(e);
   }
-};
-
-
-const currentOrg = (req, res) => {
-  res.send(req.org);
-
-
 };
 
 const logOut = async (req, res) => {
@@ -88,23 +65,8 @@ const logOut = async (req, res) => {
   }
 };
 
-const updateOrgInfo = async (req, res) => {
-  let org = req.org;
-  if (req.file) {
-    org.profileImage = req.file.path;
-    await org.save();
-  }
-  res.send(org);
-
-};
-
 module.exports = {
   signUp,
   signIn,
-
-  currentOrg,
   logOut,
-  getAllOrgs,
-  updateOrgInfo,
-
 };
