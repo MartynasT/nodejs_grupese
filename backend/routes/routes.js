@@ -4,7 +4,7 @@ const multer = require("multer");
 const eventController = require("../controllers/eventController");
 const userController = require("../controllers/userController");
 const organizatorController = require("../controllers/organizatorController");
-const authenticateMiddleware = require("../middleware/authenticate");
+const authenticateMiddleware = require("../middleware/authentication");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
