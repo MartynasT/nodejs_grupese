@@ -33,7 +33,7 @@ router.route('/user/logOut').post(authenticateMiddleware.authenticate, userContr
 // organizator
 router.route('/organizator/signUp').post(organizatorController.signUp)
 router.route('/organizator/signIn').post(organizatorController.signIn)
-router.route('/organizator/logOut').post(organizatorMiddleware.authenticate, userController.logOut)
+router.route('/organizator/logOut').post(organizatorMiddleware.authenticate, organizatorController.logOut)
 
 
 
