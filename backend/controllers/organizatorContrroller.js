@@ -1,41 +1,41 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const User = require("../models/userModel");
+const Org = require("../models/organizatorModel");
 const Session = require("../models/sessionModel");
 
 const signUp = async (req, res) => {
   try {
-    const user = new User({
+    const org = new Org({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
     });
 
-    let newUser = await user.save();
-    res.send(newUser);
+    let newOrg = await org.save();
+    res.send(newOrg);
   } catch (e) {
     console.log(e);
     res.status(400).send(e);
   }
 };
 
-const getAllUsers = async (req, res) => {
-  const allUsers = await User.find();
-  res.send(allUsers);
+const getAllOrgs = async (req, res) => {
+  const allOrgs = await Org.find();
+  res.send(allOrgs);
 };
 
 const signIn = async (req, res) => {
   try {
-    let user = await User.findOne({ email: req.body.email });
-    if (!user) throw { message: "Wrong email" };
+    let org = await Org.findOne({ email: req.body.email });
+    if (!org) throw { message: "Wrong email" };
 
-    let passwordMatch = bcrypt.compareSync(req.body.password, user.password);
+    let passwordMatch = bcrypt.compareSync(req.body.password, org.password);
     if (!passwordMatch) throw { message: "Wrong password" };
 
     let token = jwt.sign(
       {
-        id: user._id,
-        role: "user",
+        id: org._id,
+        role: "organizator",
       },
       process.env.JWT_PASSWORD
     );
@@ -47,14 +47,14 @@ const signIn = async (req, res) => {
 
     await session.save();
 
-    res.header("twitterauth", token).send(user);
+    res.header("eventauth", token).send(org);
   } catch (e) {
     res.status(400).send(e);
   }
 };
 
-const currentUser = (req, res) => {
-  res.send(req.user);
+const currentOrg = (req, res) => {
+  res.send(req.org);
 };
 
 const logOut = async (req, res) => {
@@ -71,20 +71,20 @@ const logOut = async (req, res) => {
   }
 };
 
-const updateUserInfo = async (req, res) => {
-  let user = req.user;
+const updateOrgInfo = async (req, res) => {
+  let org = req.org;
   if (req.file) {
-    user.profileImage = req.file.path;
-    await user.save();
+    org.profileImage = req.file.path;
+    await org.save();
   }
-  res.send(user);
+  res.send(org);
 };
 
 module.exports = {
   signUp,
   signIn,
-  currentUser,
+  currentOrg,
   logOut,
-  getAllUsers,
-  updateUserInfo,
+  getAllOrgs,
+  updateOrgInfo,
 };

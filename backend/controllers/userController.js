@@ -46,7 +46,7 @@ const signIn = async (req, res) => {
 
     await session.save();
 
-    res.header("twitterauth", token).send(user);
+    res.header("eventauth", token).send(user);
   } catch (e) {
     res.status(400).send(e);
   }
