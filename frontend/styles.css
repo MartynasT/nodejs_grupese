@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+}
+header {
+  background: #203656;
+  height: 80px;
+}
+.d-flex {
+  display: flex;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-center {
+  justify-content: center;
+}
+.align-center {
+  align-items: center;
+}
+.btn {
+  width: 135px;
+  height: 35px;
+  border-radius: 12px;
+  background: white;
+}
+.mr-40 {
+  margin-right: 40px;
+}
+.border-btn {
+  border: 2px solid white;
+}
+.bg-dark-blue {
+  background: #203656;
+}
+.font-white {
+  color: white;
+}
+.font-dark-blue {
+  color: #203656;
+}
