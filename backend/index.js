@@ -14,7 +14,7 @@ const corsOptions = {
 mongoose.connect("mongodb://localhost/EventDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  // useCreateIndex: true,
+  useCreateIndex: true,
 });
 
 const db = mongoose.connection;

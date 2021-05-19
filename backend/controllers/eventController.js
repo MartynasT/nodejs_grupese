@@ -2,7 +2,7 @@ const Event = require("../models/eventModel");
 
 const getAllEvents = async (req, res) => {
   const allEvents = await Event.find();
-  res.send(allUsers);
+  res.send(allEvents);
 };
 
 const createEvent = async (req, res) => {
