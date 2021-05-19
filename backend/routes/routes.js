@@ -4,7 +4,7 @@ const multer = require('multer')
 const eventController = require('../controllers/eventController')
 const userController = require('../controllers/userController')
 const organizatorController = require('../controllers/organizatorController')
-const authenticateMiddleware = require('../middleware/authenticate')
+const authenticateMiddleware = require('../middleware/authentication')
 
 
 const storage = multer.diskStorage({
@@ -33,7 +33,7 @@ router.route('/user/logOut').post(authenticateMiddleware.authenticate, userContr
 // organizator
 router.route('/organizator/signUp').post(organizatorController.signUp)
 router.route('/organizator/signIn').post(organizatorController.signIn)
-router.route('/organizator/logOut').post(organizatorMiddleware.authenticate, organizatorController.logOut)
+router.route('/organizator/logOut').post(authenticateMiddleware.authenticate, organizatorController.logOut)
 
 
 
