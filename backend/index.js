@@ -30,9 +30,15 @@ app.use(
   })
 );
 
+
+app.use(bodyParser.json({
+  limit: '50mb'
+}))
+
+
 app.use(bodyParser.json());
 
-app.use("/uploads", express.static("uploads"));
+app.use('uploads', express.static('uploads'))
 
 app.use("/api/v1", router);
 

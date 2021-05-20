@@ -6,15 +6,18 @@ const checkUserRole = async (req, res, next) =>{
   try {
     let token = req.headers["eventauth"];
     let decoded = jwt.verify(token, process.env.JWT_PASSWORD);
-
-    if (decoded.role !== 'admin')throw "error";
-
-    next();
-
+    console.log('decoded.role ',decoded.role)
+    console.log('decoded. ',decoded)
+    if (decoded.role != 'admin'){
+      throw "error";
+    }
+    else {
+      next();
+    }
 
   } catch (e){
     res.status(401).send({
-      message: "you are not authorized",
+      message: "you are not authorizedasas",
     });
   }
 }
@@ -33,6 +36,7 @@ const authenticate = async (req, res, next) => {
     req.sessionToken = session;
     next();
   } catch (e) {
+    console.log(e)
     res.status(401).send({
       message: "you are not authorized",
     });

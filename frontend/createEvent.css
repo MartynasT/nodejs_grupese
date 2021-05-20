@@ -72,8 +72,9 @@ h1 {
 h5 {
   margin: 15px 0px;
 }
-input:focus {
+input,textarea {
   outline: none;
+  border: 1px solid #000;
 }
 .input-medium {
   width: 580px;
