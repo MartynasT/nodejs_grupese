@@ -9,6 +9,8 @@ const signUp = async (req, res) => {
     const user = new User({
       email: req.body.email,
       password: req.body.password,
+      role: req.body.role,
+      organization: req.body.organization,
     });
 
     let newUser = await user.save();
@@ -30,7 +32,7 @@ const signIn = async (req, res) => {
     let token = jwt.sign(
       {
         id: user._id,
-        role: "user",
+        role: req.body.role,
       },
       process.env.JWT_PASSWORD
     );
