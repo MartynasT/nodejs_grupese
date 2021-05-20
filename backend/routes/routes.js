@@ -31,5 +31,4 @@ router
   .route("/user/logOut")
   .post(authenticateMiddleware.authenticate, userController.logOut);
 
-
 module.exports = router;
