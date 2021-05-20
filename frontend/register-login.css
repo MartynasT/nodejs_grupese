@@ -1,0 +1,42 @@
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+}
+h3 {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 48px;
+}
+.mr-100 {
+  margin-right: 100px;
+}
+.container {
+  margin-top: 100px;
+}
+.wrapper {
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+button.btn-dark {
+  background: #203656;
+  color: white;
+  margin-top: 35px;
+}
+.form-control {
+  border: 2px solid #000000;
+  box-sizing: border-box;
+  border-radius: 16px;
+  height: 44px;
+  left: 222px;
+  width: 384px;
+  margin-top: 8px;
+}
+label {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+}
+.inputEl {
+  margin: 10px 0;
+}
