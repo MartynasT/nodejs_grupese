@@ -21,7 +21,7 @@ const upload = multer({
 // Events
 router
   .route("/event")
-  .post(authenticateMiddleware.authenticate, eventController.createEvent)
+  .post(authenticateMiddleware.checkUserRole, authenticateMiddleware.authenticate, eventController.createEvent)
   .get(eventController.getAllEvents);
 
 // user
@@ -31,12 +31,5 @@ router
   .route("/user/logOut")
   .post(authenticateMiddleware.authenticate, userController.logOut);
 
-// organizator
-
-router.route("/organizator/signUp").post(organizatorController.signUp);
-router.route("/organizator/signIn").post(organizatorController.signIn);
-router
-  .route("/organizator/logOut")
-  .post(authenticateMiddleware.authenticate, organizatorController.logOut);
 
 module.exports = router;
