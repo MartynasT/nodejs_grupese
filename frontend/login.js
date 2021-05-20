@@ -1,11 +1,6 @@
 let url = "http://localhost:3000/api/v1";
-<<<<<<< Updated upstream
 
 document.getElementById("loginUser").addEventListener("click", async (e) => {
-=======
-console.log("veikia");
-document.getElementById("login").addEventListener("click", async (e) => {
->>>>>>> Stashed changes
   e.preventDefault();
 
   let email = document.getElementById("email").value;
@@ -25,7 +20,6 @@ document.getElementById("login").addEventListener("click", async (e) => {
       },
       body: JSON.stringify(body),
     });
-<<<<<<< Updated upstream
     if (response.status != 200) throw await response.json();
     //is response headerio pasiemam tokena kuri siunciam is serverio
     let token = response.headers.get("eventauth");
@@ -72,22 +66,6 @@ document.getElementById("loginOrg").addEventListener("click", async (e) => {
     localStorage.setItem("user", await JSON.stringify(await response.json()));
     // siunciam useri i homepage
     // window.location.href = "./";
-=======
-    // jeigu atsakymas is serverio yra klaida (kitaip sakant ne 200) tada stabdome funckija ir numetam i catch blocka
-    if (response.status != 200) throw await response.json();
-    //is response headerio pasiemam tokena kuri siunciam is serverio
-    let token = response.headers.get("twitterauth");
-
-    //tokena issaugom localstorage (narsykleje)
-    localStorage.setItem("twitterauth", token);
-    //Issaugom userio duomenis localstorate
-    localStorage.setItem(
-      "twitter-user",
-      await JSON.stringify(await response.json())
-    );
-    // siunciam useri i homepage
-    window.location.href = "./";
->>>>>>> Stashed changes
   } catch (e) {
     console.log(e);
     alert(e.message);
