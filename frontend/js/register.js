@@ -28,7 +28,7 @@ document.getElementById('user-form').addEventListener('submit', async (event) =>
 
   console.log(data)
 
-  window.location.href = './login'
+  window.location.href = './login.html'
 
 })
 

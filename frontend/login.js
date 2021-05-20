@@ -47,6 +47,7 @@ document.getElementById("loginOrg").addEventListener("click", async (e) => {
   let body = {
     email,
     password,
+    role: 'admin'
   };
   try {
     let response = await fetch(`${url}/user/signIn`, {
@@ -65,7 +66,7 @@ document.getElementById("loginOrg").addEventListener("click", async (e) => {
     //Issaugom userio duomenis localstorate
     localStorage.setItem("user", await JSON.stringify(await response.json()));
     // siunciam useri i homepage
-    // window.location.href = "./";
+    window.location.href = "./index.html";
   } catch (e) {
     console.log(e);
     alert(e.message);

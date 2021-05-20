@@ -6,11 +6,15 @@ const getAllEvents = async (req, res) => {
 };
 
 const createEvent = async (req, res) => {
+  console.log(req.body)
+  console.log(req.file)
   try {
     const event = new Event({
-      title: req.body.title,
+      title: req.body.eventTitle,
       eventDate: req.body.eventDate,
       eventContent: req.body.content,
+      eventImage: req.file.path
+
     });
 
     let savedEvent = await event.save();
