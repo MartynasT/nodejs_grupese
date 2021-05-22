@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
     },
     organization: {
       type: String,
-      default: '',
+      default: "",
     },
     role: {
       type: String,
