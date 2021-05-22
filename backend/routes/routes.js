@@ -21,6 +21,7 @@ const upload = multer({
 // Events
 router
   .route("/event")
+
   .post(authenticateMiddleware.checkUserRole, authenticateMiddleware.authenticate, upload.single('image'), eventController.createEvent)
   .get(eventController.getAllEvents);
 
