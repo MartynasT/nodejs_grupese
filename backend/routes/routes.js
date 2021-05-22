@@ -15,17 +15,14 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({
-  storage,
+  storage
 });
 
 // Events
 router
   .route("/event")
-  .post(
-    authenticateMiddleware.checkUserRole,
-    authenticateMiddleware.authenticate,
-    eventController.createEvent
-  )
+
+  .post(authenticateMiddleware.checkUserRole, authenticateMiddleware.authenticate, upload.single('image'), eventController.createEvent)
   .get(eventController.getAllEvents);
 
 // user

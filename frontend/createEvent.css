@@ -15,7 +15,27 @@ header {
 }
 
 input:focus {
+.bg-dark-blue {
+  background: #203656;
+}
+.bg-light-blue {
+  background: #59d7ff;
+}
+.font-white {
+  color: white;
+}
+.font-dark-blue {
+  color: #203656;
+}
+h1 {
+  margin: 15px 0px 5px 0px;
+}
+h5 {
+  margin: 15px 0px;
+}
+input,textarea {
   outline: none;
+  border: 1px solid #000;
 }
 
 .input-medium {

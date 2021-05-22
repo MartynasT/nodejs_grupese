@@ -22,7 +22,7 @@ const eventSchema = new mongoose.Schema(
     toJSON: {
       transform(doc, ret) {
         if (ret.eventImage)
-          ret.eventImage = "http://localhost:3000/" + ret.eventImage;
+          ret.eventImage = "http://localhost:3000/api/v1/" + ret.eventImage;
       },
     },
   }

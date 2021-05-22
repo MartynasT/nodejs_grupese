@@ -27,7 +27,7 @@ document
 
     let data = await response.json();
 
-    console.log(data);
+  window.location.href = './login.html'
 
     window.location.href = "./login.html";
   });
