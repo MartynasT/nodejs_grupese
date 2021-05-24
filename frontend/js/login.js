@@ -29,7 +29,7 @@ document.getElementById("loginUser").addEventListener("click", async (e) => {
     //Issaugom userio duomenis localstorate
     localStorage.setItem("user", await JSON.stringify(await response.json()));
     // siunciam useri i homepage
-    window.location.href = "./";
+    window.location.href = "index.html";
   } catch (e) {
     console.log(e);
     alert(e.message);

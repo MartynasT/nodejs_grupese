@@ -15,7 +15,9 @@ const createEvent = async (req, res) => {
       title: req.body.eventTitle,
       eventDate: req.body.eventDate,
       eventContent: req.body.content,
-      eventImage: relPath
+      eventImage: relPath,
+      category: req.body.category,
+      location: req.body.eventLocation,
 
     });
 

@@ -9,6 +9,18 @@ header {
   background: #203656;
   height: 80px;
 }
+
+
+form{
+  width: 50%;
+  margin: 0 auto;
+  padding: 62px 0 80px;
+}
+
+.event-image-wrapper label{
+  display: inline-block;
+}
+
 .d-flex {
   display: flex;
 }
@@ -30,12 +42,7 @@ header {
 .flex-column {
   flex-direction: column;
 }
-.btn {
-  padding: 5px 30px;
-  border-radius: 12px;
-  background: white;
-  cursor: pointer;
-}
+
 .w-580 {
   width: 580px;
 }
@@ -68,16 +75,14 @@ input:focus
 .font-dark-blue {
   color: #203656;
 }
-h1 {
-  margin: 15px 0px 5px 0px;
-}
+
 h5 {
   margin: 15px 0px;
 }
-input,textarea {
-  outline: none;
-  border: 1px solid #000;
-}
+/*input,textarea {*/
+/*  outline: none;*/
+/*  border: 1px solid #000;*/
+/*}*/
 
 .input-medium {
   width: 580px;

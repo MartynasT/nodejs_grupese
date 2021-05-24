@@ -15,7 +15,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
 
 })
 
-
 //create Event
 document.getElementById('eventForm').addEventListener('submit', async(e)=>{
   e.preventDefault()
@@ -23,42 +22,28 @@ document.getElementById('eventForm').addEventListener('submit', async(e)=>{
   const formData = new FormData()
   let eventImage = document.getElementById('eventImg');
 
-
   let eventTitle = document.getElementById('eventTitle').value;
   let eventDate = document.getElementById('eventDate').value;
   let eventLocation = document.getElementById('eventLocation').value;
   let content = document.getElementById('eventInfo').value;
-  console.log(eventTitle)
-  console.log(eventDate)
-  console.log(eventLocation)
-  console.log(content)
-
+  let eventCategory = document.getElementById('eventCategory').value;
 
   if(!content && !eventDate && !eventTitle && !eventLocation) alert('Provide content')
 
-
   if (eventImage.files !== 0 ){
     formData.append('image', eventImage.files[0])
-
-    console.log(formData)
-    // formData.append('content', content)
-    // console.log(formData)
   }
+
   formData.append('eventTitle', eventTitle);
   formData.append('eventDate', eventDate);
   formData.append('eventLocation', eventLocation);
   formData.append('content', content);
+  formData.append('category', eventCategory);
 
-
-  // let body = {
-  // content,
-  // formData
-  // }
   try{
     let response = await fetch(`${url}/event`,{
       method: "POST",
       headers: {
-        // 'Content-Type': 'application/json',
         'eventauth': token,
       },
       body:formData
@@ -78,5 +63,4 @@ document.getElementById('eventForm').addEventListener('submit', async(e)=>{
     alert(e)
     console.log(e)
   }
-
 })

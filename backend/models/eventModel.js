@@ -17,6 +17,14 @@ const eventSchema = new mongoose.Schema(
     eventImage: {
       type: String,
     },
+    category: {
+      type: String,
+      default: ''
+    },
+    location:{
+      type: String,
+      default: 'TBA'
+    }
   },
   {
     toJSON: {
