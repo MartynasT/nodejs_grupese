@@ -64,8 +64,36 @@ const logOut = async (req, res) => {
   }
 };
 
+const saveEvent = async (req, res) =>{
+  try{
+    let user = await User.findOne({ _id: req.user._id });
+
+    if(user.savedEvent.indexOf(req.body.eventId) !== -1){
+      console.log('this event was in list so its removed')
+      user.savedEvent.pull(await req.body.eventId)
+    } else {
+      console.log('this event wasnt in the list so its added')
+      user.savedEvent.push(await req.body.eventId)
+    }
+    // await User.update(
+    //   { _id: req.user._id},
+    //   {$push: {savedEvent: await req.body.eventId}},
+    //   {multi: true}
+    //   )
+
+    // user.savedEvent.push(await req.body.eventId)
+    await user.save()
+
+  }catch (e){
+    console.log(e)
+  }
+
+  res.send({message: "eventSaved", user: req.user._id})
+}
+
 module.exports = {
   signUp,
   signIn,
   logOut,
+  saveEvent
 };

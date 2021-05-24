@@ -18,12 +18,16 @@ const userSchema = new mongoose.Schema(
     },
     organization: {
       type: String,
-      default: "",
+      default: '',
     },
     role: {
       type: String,
       default: "basic",
     },
+    savedEvent: {
+      type: Array,
+      default: []
+    }
   },
   {
     toJSON: {

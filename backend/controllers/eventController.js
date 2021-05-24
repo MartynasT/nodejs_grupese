@@ -8,12 +8,14 @@ const getAllEvents = async (req, res) => {
 const createEvent = async (req, res) => {
   console.log(req.body)
   console.log(req.file)
+  // const relPath = req.file.path.replace(remove,'').replace(/\\/g, '/')
+  const relPath = req.file.path.replace(/\\/g, '/')
   try {
     const event = new Event({
       title: req.body.eventTitle,
       eventDate: req.body.eventDate,
       eventContent: req.body.content,
-      eventImage: req.file.path
+      eventImage: relPath
 
     });
 
