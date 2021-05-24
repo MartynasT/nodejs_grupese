@@ -1,19 +1,18 @@
-let url = 'http://localhost:3000/api/v1'
+let url = "http://localhost:3000/api/v1";
 let token;
 
 let userData;
 let userSavedEvents;
 
-
-window.addEventListener('DOMContentLoaded', ()=>{
-  console.log('veikia')
+window.addEventListener("DOMContentLoaded", () => {
+  console.log("veikia");
   // user = localStorage.getItem('user');
-  token = localStorage.getItem('eventauth')
+  token = localStorage.getItem("eventauth");
 
-  userData = JSON.parse(localStorage.getItem('user'));
+  userData = JSON.parse(localStorage.getItem("user"));
 
   userSavedEvents = userData.savedEvent;
-  console.log(userSavedEvents)
+  console.log(userSavedEvents);
   // if (!token) {
   //   window.location.href='./login.html'
   // }
@@ -22,29 +21,26 @@ window.addEventListener('DOMContentLoaded', ()=>{
   //
   // getAllTweets();
   getAllEvents();
-})
+});
 
-const getAllEvents = async()=>{
+const getAllEvents = async () => {
   let response = await fetch(`${url}/event`, {
-    method: 'GET',
+    method: "GET",
   });
 
-  let events = await response.json()
-  console.log(events)
-  showAllEvents(events)
+  let events = await response.json();
+  console.log(events);
+  showAllEvents(events);
   loadSliderEvents(events);
-}
+};
 
-
-const showAllEvents = (items)=>{
-
-  const bigEventHollder = document.getElementById('bigEventHollder');
-  const eventsHolder = document.querySelector('.all-events');
-  items.forEach((item, index)=>{
-
-    let savedClass ='';
-    if (userSavedEvents.includes(item._id)){
-      savedClass = 'saved';
+const showAllEvents = (items) => {
+  const bigEventHollder = document.getElementById("bigEventHollder");
+  const eventsHolder = document.querySelector(".all-events");
+  items.forEach((item, index) => {
+    let savedClass = "";
+    if (userSavedEvents.includes(item._id)) {
+      savedClass = "saved";
     }
 
     let card = `
@@ -72,18 +68,17 @@ const showAllEvents = (items)=>{
                 </div>
               </div>
             </article>`;
-    if (index > 0){
+    if (index > 0) {
       eventsHolder.innerHTML += card;
     } else {
-      bigEventHollder.innerHTML += card
+      bigEventHollder.innerHTML += card;
     }
+  });
+};
 
-  })
-}
-
-const loadSliderEvents = (events) =>{
-  const swiperWrapper = document.querySelector('.swiper-wrapper');
-  events.forEach((item, index)=>{
+const loadSliderEvents = (events) => {
+  const swiperWrapper = document.querySelector(".swiper-wrapper");
+  events.forEach((item, index) => {
     if (index < 2) {
       let card = `
         <div class="swiper-slide" style="background-image: url('${item.eventImage}')">
@@ -93,73 +88,85 @@ const loadSliderEvents = (events) =>{
           </div>
           `;
       swiperWrapper.innerHTML += card;
-    }else {
-      const swiper = new Swiper('.swiper-container', {
+    } else {
+      const swiper = new Swiper(".swiper-container", {
         // Optional parameters
-        direction: 'horizontal',
+        direction: "horizontal",
         loop: true,
 
         // If we need pagination
         pagination: {
-          el: '.swiper-pagination',
+          el: ".swiper-pagination",
         },
 
         // Navigation arrows
         navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
         },
-
       });
     }
-  })
+  });
+};
 
-}
-
-const saveEvent = async (el, eventId)=> {
-
-  el.classList.toggle('saved');
+const saveEvent = async (el, eventId) => {
+  el.classList.toggle("saved");
 
   updateUserLocalStorage(eventId);
 
   let body = {
-    eventId
-  }
-  try{
+    eventId,
+  };
+  try {
     let response = await fetch(`${url}/saveEvent`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'eventauth': token,
+        "Content-Type": "application/json",
+        eventauth: token,
       },
-      body: JSON.stringify(body)
-
+      body: JSON.stringify(body),
     });
     let data = await response.json();
-    console.log(data)
+    console.log(data);
     // console.log(response.json())
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
+};
 
-const updateUserLocalStorage = (id)=>{
-  console.log('event id :', id)
-  console.log('user data:', userData)
+const updateUserLocalStorage = (id) => {
+  console.log("event id :", id);
+  console.log("user data:", userData);
 
-  if (userData.savedEvent.includes(id)){
-    userData.savedEvent = userData.savedEvent.filter(event=>{
-    if (event !== id){
-      return event;
-    }
+  if (userData.savedEvent.includes(id)) {
+    userData.savedEvent = userData.savedEvent.filter((event) => {
+      if (event !== id) {
+        return event;
+      }
     });
-  }else {
-    console.log('doesn exists')
+  } else {
+    console.log("doesn exists");
     userData.savedEvent.push(id);
   }
 
-  localStorage.setItem('user', JSON.stringify(userData))
+  localStorage.setItem("user", JSON.stringify(userData));
 
-  console.log(userData)
+  console.log(userData);
+};
 
-}
+document.getElementById("e-music").addEventListener("click", function () {
+  console.log("veikia");
+  localStorage.setItem("category", "music");
+});
+document.getElementById("e-family").addEventListener("click", function () {
+  console.log("veikia");
+  localStorage.setItem("category", "family");
+});
+document.getElementById("e-art").addEventListener("click", function () {
+  console.log("veikia");
+  localStorage.setItem("category", "art");
+});
+document.getElementById("e-fair").addEventListener("click", function () {
+  console.log("veikia");
+  localStorage.setItem("category", "fair");
+});
