@@ -1,10 +1,9 @@
-let token;
-let url = 'http://localhost:3000/api/v1'
-let user;
+
+
 
 window.addEventListener('DOMContentLoaded', () => {
   token = localStorage.getItem('eventauth')
-
+  let user;
   if (!token) return window.location.href = './login.html'
 
 user = JSON.parse(localStorage.getItem('user'))
@@ -14,58 +13,81 @@ if(user.role == "basic") {
     setUpNavBasic()
 } else if (user.role =="admin") {
     setUpNavAdmin()
+} else {
+  setUpNav()
 }
-//   getAllEvents()
-//   setUpNavBar()
-
 })
 
-// const getAllEvents = async () => {
-//   let response = await fetch(`${url}/event`, {
-//     method: 'GET'
-//   })
+const setUpNavBasic = async () => {
 
-//   let events = await response.json()
-//   console.log(events)
-//   showEvents(events)
-
-// }
-
-// const setUpNavBasic = async () => {
-//   const logOutBtn = document.getElementById('login').innerHTML ="Log out"
-
-// }
-// const setUpNavAdmin = async () => {
-//     const logOutBtn = document.getElementById('login').innerHTML ="Log out"
-//     const createEventBtn = document.getElementById('register').innerHTML="Create event"
-//     const profile = `<i class="fa fa-user" aria-hidden="true"></i>` 
-//     const profileEl= document.getElementById("prof").append(profile)
-//   }
+  const HomeBtn = document.createElement('a')
+  HomeBtn.innerText="Home"
+  HomeBtn.href="./"
   
+  const SavedEventsBtn = document.createElement('a')
+  SavedEventsBtn.innerText="Saved events"
+  SavedEventsBtn.href="./userSavedEvents.html" 
+  
+  const LogOutBtn = document.createElement('button')
+  LogOutBtn.innerText="Log out"
+  LogOutBtn.setAttribute("type", "button")
+  LogOutBtn.setAttribute("onclick", "logOut()")
+  LogOutBtn.classList.add=("navBtn")
 
-// const showEvents = (events) => {
+  const header = document.getElementById('header')
+  header.append(HomeBtn)
+  header.append(SavedEventsBtn)
+  header.append(LogOutBtn)
 
-//   for (let event of events) {
-//     let event = `<div class="all-events">
-//     <article class="event event-small">
-//       <div class="event-image" style="background-image: url(image.jpg)">
-//         <h2>${event.title}</h2>
-//       </div>
-//       <div class="event--body">
-//         <p>${event.eventContent}</p>
-//         <div class="event--info"><span>Date:</span>${event.eventDate}</div>
-//       </div>
-//     </article>`
-//     let cardContainer = document.getElementById('cardContainer')
-//     cardContainer.innerHTML += card
-//   }
-// }
+}
+const setUpNavAdmin = async () => {
 
-// const selectEvent = async (el, id) => {
+  const CreatedEventsBtn = document.createElement('a')
+  CreatedEventsBtn.innerText="Created Events"
+  CreatedEventsBtn.href="./orgEvents.html" 
 
-// }
+  const HomeBtn = document.createElement('a')
+  HomeBtn.innerText="Home"
+  HomeBtn.href="./index.html"
+  
+  const CreateEventBtn = document.createElement('a')
+  CreateEventBtn.innerText="Create event"
+  CreateEventBtn.href="./createEvent.html" 
+  
+  const LogOutBtn = document.createElement('button')
+  LogOutBtn.innerText="Log out"
+  LogOutBtn.setAttribute("type", "button")
+  LogOutBtn.setAttribute("onclick", "logOut()")
+
+  const header = document.getElementById('header')
+  header.append(CreatedEventsBtn)
+  header.append(HomeBtn)
+  header.append(CreateEventBtn)
+  header.append(LogOutBtn)
+
+  }
+  const setUpNav = async () => { 
+    const LoginBtn = document.createElement('button')
+    LoginBtn.innerText="Login"
+    LoginBtn.setAttribute("type", "button")
+    LoginBtn.setAttribute('onclick', 'location.href="./login.html"')
+  
+    const RegisterBtn = document.createElement('button')
+    RegisterBtn.innerText="Register"
+    RegisterBtn.setAttribute("type", "button")
+    RegisterBtn.classList.add('dark-btn')
+    RegisterBtn.setAttribute('onclick', 'location.href="./register.html"')
+
+    const header = document.getElementById('header')
+  header.append(RegisterBtn)
+  header.append(LoginBtn)
+ 
+
+  }
+
 
 const logOut = async () => {
+  let url = "http://localhost:3000/api/v1";
   let response = await fetch(`${url}/user/logOut`, {
     method: 'POST',
     headers: {
@@ -80,3 +102,4 @@ const logOut = async () => {
   window.location.href = './login.html'
 
 }
+

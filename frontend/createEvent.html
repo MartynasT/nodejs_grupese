@@ -5,76 +5,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
-      input, label{
+      input,
+      label {
         display: block;
       }
-      input{
+      input {
         border: none;
         background: none;
       }
     </style>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/utilities.css" />
     <link rel="stylesheet" href="createEvent.css" />
+    <link rel="stylesheet" href="css/header.css" />
 
     <title>Document</title>
-
   </head>
   <body>
-    <header class="d-flex justify-end align-center">
-      <div
-        class="
-          btn
-          mr-40
-          border-btn
-          bg-dark-blue
-          font-white
-          d-flex
-          align-center
-          justify-center
-        "
-      >
-        Register
-      </div>
-      <div
-        class="
-          btn
-          mr-40
-          border-btn
-          font-dark-blue
-          d-flex
-          align-center
-          justify-center
-        "
-      >
-        Login
-      </div>
-    </header>
+    <header id="header" class="d-flex justify-end align-center"></header>
     <main class="container">
-
-
-      <form  id="eventForm">
+      <form id="eventForm">
         <h1 class="title mb-4">Create Event</h1>
 
         <div class="input-wrapper">
           <label for="eventTitle">Event title</label>
-          <input type="text" id="eventTitle">
+          <input type="text" id="eventTitle" />
         </div>
 
-        <div class="create-box d-flex  space-btw">
+        <div class="create-box d-flex space-btw">
           <div class="input-wrapper w-45">
             <label for="eventDate">Event Date</label>
-            <input type="date" id="eventDate">
+            <input type="date" id="eventDate" />
           </div>
 
           <div class="input-wrapper w-45">
             <label for="eventLocation">Event Location</label>
-            <input type="text" id="eventLocation">
+            <input type="text" id="eventLocation" />
           </div>
-
         </div>
 
         <div class="input-wrapper">
@@ -106,5 +79,6 @@
       </form>
     </main>
     <script src="./js/createEvent.js"></script>
+    <script src="./js/main.js"></script>
   </body>
 </html>
