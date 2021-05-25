@@ -84,7 +84,7 @@ const showAllEvents = (items)=>{
 const loadSliderEvents = (events) =>{
   const swiperWrapper = document.querySelector('.swiper-wrapper');
   events.forEach((item, index)=>{
-    if (index < 2) {
+    if (index < 3) {
       let card = `
         <div class="swiper-slide" style="background-image: url('${item.eventImage}')">
             <div class="container" >
@@ -93,26 +93,31 @@ const loadSliderEvents = (events) =>{
           </div>
           `;
       swiperWrapper.innerHTML += card;
-    }else {
-      const swiper = new Swiper('.swiper-container', {
-        // Optional parameters
-        direction: 'horizontal',
-        loop: true,
-
-        // If we need pagination
-        pagination: {
-          el: '.swiper-pagination',
-        },
-
-        // Navigation arrows
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-
-      });
     }
+    const swiper = new Swiper('.swiper-container', {
+      // Optional parameters
+      direction: 'horizontal',
+      loop: false,
+      // init: false,
+      speed: 500,
+
+      // If we need pagination
+      pagination: {
+        el: '.swiper-pagination',
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+
+    });
+    // setTimeout(swiper.init(), 2000)
+
+
   })
+
 
 }
 
