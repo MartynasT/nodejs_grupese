@@ -76,10 +76,12 @@ const showAllEvents = (items) => {
   });
 };
 
-const loadSliderEvents = (events) => {
-  const swiperWrapper = document.querySelector(".swiper-wrapper");
-  events.forEach((item, index) => {
-    if (index < 2) {
+
+
+const loadSliderEvents = (events) =>{
+  const swiperWrapper = document.querySelector('.swiper-wrapper');
+  events.forEach((item, index)=>{
+    if (index < 3) {
       let card = `
         <div class="swiper-slide" style="background-image: url('${item.eventImage}')">
             <div class="container" >
@@ -88,6 +90,7 @@ const loadSliderEvents = (events) => {
           </div>
           `;
       swiperWrapper.innerHTML += card;
+
     } else {
       const swiper = new Swiper(".swiper-container", {
         // Optional parameters
@@ -108,6 +111,7 @@ const loadSliderEvents = (events) => {
     }
   });
 };
+
 
 const saveEvent = async (el, eventId) => {
   el.classList.toggle("saved");
