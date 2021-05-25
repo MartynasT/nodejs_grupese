@@ -35,6 +35,7 @@ const getOrganizatorEvents = async (req, res) =>{
   res.send(events);
 }
 
+
 const getOneEvent = async (req, res) =>{
   let event = await Event.find({_id: await req.body.id})
   res.send(event)
@@ -45,4 +46,5 @@ module.exports = {
   createEvent,
   getOrganizatorEvents,
   getOneEvent
+n
 };

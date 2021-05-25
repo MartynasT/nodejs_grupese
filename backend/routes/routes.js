@@ -31,8 +31,10 @@ router.route("/organizatorEvents")
   .get(authenticateMiddleware.checkUserRole, authenticateMiddleware.authenticate, eventController.getOrganizatorEvents)
 
 
+
 router.route('/getOneEvent')
   .post(eventController.getOneEvent)
+
 // user
 router.route("/user/signUp").post(userController.signUp);
 router.route("/user/signIn").post(userController.signIn);
