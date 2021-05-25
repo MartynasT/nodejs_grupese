@@ -1,13 +1,18 @@
-
-
-
 window.addEventListener('DOMContentLoaded', () => {
   token = localStorage.getItem('eventauth')
   let user;
-  if (!token) return window.location.href = './login.html'
+  // if (!token) return window.location.href = './login.html'
 
 user = JSON.parse(localStorage.getItem('user'))
-console.log(user.role)
+  console.log(user)
+// console.log(user.role)
+
+  if(!user){
+     user = {
+      role: 'guest',
+    }
+    localStorage.setItem('user',JSON.stringify(user) )
+  }
 
 if(user.role == "basic") {
     setUpNavBasic()
