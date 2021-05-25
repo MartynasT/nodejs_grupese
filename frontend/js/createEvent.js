@@ -37,7 +37,7 @@ document.getElementById('eventForm').addEventListener('submit', async(e)=>{
   let eventLocation = document.getElementById('eventLocation').value;
   let content = document.getElementById('eventInfo').value;
   let eventCategory = document.getElementById('eventCategory').value;
-
+console.log(eventCategory)
   if(!content && !eventDate && !eventTitle && !eventLocation) alert('Provide content')
 
   if (eventImage.files !== 0 ){
