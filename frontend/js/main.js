@@ -27,8 +27,7 @@ const setUpNavBasic = async () => {
 
   const HomeBtn = document.createElement('a')
   HomeBtn.innerText="Home"
-  HomeBtn.href="./"
-  
+  HomeBtn.href="./index.html"
   const SavedEventsBtn = document.createElement('a')
   SavedEventsBtn.innerText="Saved events"
   SavedEventsBtn.href="./userSavedEvents.html" 
