@@ -24,7 +24,12 @@ const eventSchema = new mongoose.Schema(
     location:{
       type: String,
       default: 'TBA'
-    }
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User'
+    },
   },
   {
     toJSON: {

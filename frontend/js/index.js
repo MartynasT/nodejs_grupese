@@ -49,7 +49,6 @@ const showAllEvents = (items) => {
       }
     }
 
-
     let card = `
           <article class="event event-small" >
               <div class="event-image" style="background-image: url('${item.eventImage}')">

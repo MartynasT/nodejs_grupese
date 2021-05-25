@@ -240,3 +240,13 @@ EVENT CARD
     line-height: 12px;
     color: #fff;
 }
+
+.all-events {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    column-gap: 20px;
+    row-gap: 40px;
+    padding-top: 80px;
+}
