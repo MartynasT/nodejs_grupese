@@ -106,4 +106,3 @@ const logOut = async () => {
   window.location.href = './login.html'
 
 }
-
