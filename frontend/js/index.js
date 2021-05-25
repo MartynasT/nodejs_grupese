@@ -6,13 +6,16 @@ let userSavedEvents;
 
 window.addEventListener("DOMContentLoaded", () => {
   console.log("veikia");
-  // user = localStorage.getItem('user');
-  token = localStorage.getItem("eventauth");
+  user = localStorage.getItem('user');
+  // token = localStorage.getItem("eventauth");
 
   userData = JSON.parse(localStorage.getItem("user"));
 
-  userSavedEvents = userData.savedEvent;
-  console.log(userSavedEvents);
+  if (userData){
+    userSavedEvents = userData.savedEvent;
+    console.log(userSavedEvents);
+  }
+
   // if (!token) {
   //   window.location.href='./login.html'
   // }
@@ -38,10 +41,14 @@ const showAllEvents = (items) => {
   const bigEventHollder = document.getElementById("bigEventHollder");
   const eventsHolder = document.querySelector(".all-events");
   items.forEach((item, index) => {
+
     let savedClass = "";
-    if (userSavedEvents.includes(item._id)) {
-      savedClass = "saved";
+    if (userData.role !== 'guest'){
+      if (userSavedEvents.includes(item._id)) {
+        savedClass = "saved";
+      }
     }
+
 
     let card = `
           <article class="event event-small" >
@@ -152,9 +159,7 @@ const updateUserLocalStorage = (id) => {
     console.log("doesn exists");
     userData.savedEvent.push(id);
   }
-
   localStorage.setItem("user", JSON.stringify(userData));
-
   console.log(userData);
 };
 
