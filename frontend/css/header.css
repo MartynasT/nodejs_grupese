@@ -1,0 +1,36 @@
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+header a {
+  text-decoration: none;
+  padding: 8px 30px;
+  border-radius: 12px;
+  background: #203656;
+  cursor: pointer;
+  margin-left: 35px;
+  border: 1px solid white;
+  color: white;
+}
+
+header button {
+  text-decoration: none;
+  padding: 8px 40px;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  margin-right: 30px;
+  margin-left: 40px;
+  border: 1px solid white;
+  color: #203656;
+}
+.dark-btn {
+  text-decoration: none;
+  padding: 8px 30px;
+  border-radius: 12px;
+  background: #203656;
+  cursor: pointer;
+
+  border: 1px solid white;
+  color: white;
+}
