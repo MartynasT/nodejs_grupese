@@ -7,11 +7,21 @@ window.addEventListener('DOMContentLoaded', ()=>{
   console.log('veikia')
   user = localStorage.getItem('user');
   token = localStorage.getItem('eventauth')
-  if (!token) {
+  user = JSON.parse(localStorage.getItem('user'))
+
+  if(!user){
+    user = {
+     role: 'guest',
+   }
+   localStorage.setItem('user',JSON.stringify(user) )
+ }
+
+
+  if (user.role != "admin" ) {
     window.location.href='./index.html'
   }
 
-  user = JSON.parse(localStorage.getItem('user'))
+
 
 })
 
