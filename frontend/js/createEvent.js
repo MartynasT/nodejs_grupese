@@ -37,6 +37,8 @@ document.getElementById('eventForm').addEventListener('submit', async(e)=>{
   let eventLocation = document.getElementById('eventLocation').value;
   let content = document.getElementById('eventInfo').value;
   let eventCategory = document.getElementById('eventCategory').value;
+  let eventPrice = document.getElementById('eventPrice').value;
+  let ticketsAmount = document.getElementById('ticketsAmount').value;
 console.log(eventCategory)
   if(!content && !eventDate && !eventTitle && !eventLocation) alert('Provide content')
 
@@ -49,6 +51,8 @@ console.log(eventCategory)
   formData.append('eventLocation', eventLocation);
   formData.append('content', content);
   formData.append('category', eventCategory);
+  formData.append('price', eventPrice);
+  formData.append('tickets', ticketsAmount);
 
   try{
     let response = await fetch(`${url}/event`,{
@@ -64,10 +68,16 @@ console.log(eventCategory)
     let data = await response.json();
     console.log(data)
 
-    // document.getElementById('eventTitle').value = '';
-    // document.getElementById('eventDate').value = '';
-    // document.getElementById('eventLocation  ').value = '';
-    // document.getElementById('content').value = '';
+    alert('Event Created!');
+
+
+    document.getElementById('eventTitle').value = '';
+    document.getElementById('eventDate').value = '';
+    document.getElementById('eventLocation').value = '';
+    document.getElementById('eventInfo').value = '';
+    document.getElementById('eventCategory').value = '';
+    document.getElementById('eventPrice').value = '';
+    document.getElementById('ticketsAmount').value = '';
 
   } catch (e){
     alert(e)

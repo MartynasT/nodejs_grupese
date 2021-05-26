@@ -19,6 +19,8 @@ const createEvent = async (req, res) => {
       category: req.body.category,
       location: req.body.eventLocation,
       userId: req.user._id,
+      tickets: req.body.tickets,
+      price: req.body.price
     });
 
     let savedEvent = await event.save();
@@ -94,6 +96,31 @@ const cancelEvent = async (req, res) => {
   }
 };
 
+const buyTicket = async (req, res) =>{
+
+  try{
+    if(!req.body.id) throw {message: 'need id'}
+     Event.findOneAndUpdate(
+      {_id:await req.body.id},
+      {
+        $inc: {tickets: -1}
+      },
+      {new: true},
+      function(err, result) {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send(result);
+        }
+      }
+    )
+
+  } catch (e){
+    res.status(400).send(e);
+  }
+}
+
+
 module.exports = {
   getAllEvents,
   createEvent,
@@ -102,5 +129,6 @@ module.exports = {
   updateEvent,
   cancelEvent,
   getOneEvent,
-  getOrganizatorEventsForEventPage
+  getOrganizatorEventsForEventPage,
+  buyTicket
 };
