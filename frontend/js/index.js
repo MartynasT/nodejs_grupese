@@ -1,5 +1,6 @@
 let url = "http://localhost:3000/api/v1";
 let token;
+let user;
 
 let userData;
 let userSavedEvents;
@@ -13,6 +14,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
   userSavedEvents = userData.savedEvent;
   console.log(userSavedEvents);
+  if (!user) {
+    user = {
+      role: "guest",
+    };
+    localStorage.setItem("user", JSON.stringify(user));
+  }
   // if (!token) {
   //   window.location.href='./login.html'
   // }
@@ -39,8 +46,11 @@ const showAllEvents = (items) => {
   const eventsHolder = document.querySelector(".all-events");
   items.forEach((item, index) => {
     let savedClass = "";
-    if (userSavedEvents.includes(item._id)) {
-      savedClass = "saved";
+    if(user.role !== 'guest') {
+
+      if (userSavedEvents.includes(item._id)) {
+        savedClass = "saved";
+      }
     }
 
     let card = `
