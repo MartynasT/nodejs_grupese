@@ -67,6 +67,10 @@ const setUpNavAdmin = async () => {
   header.append(LogOutBtn);
 };
 const setUpNav = async () => {
+  const HomeBtn = document.createElement("a");
+  HomeBtn.innerText = "Home";
+  HomeBtn.href = "./index.html";
+
   const LoginBtn = document.createElement("button");
   LoginBtn.innerText = "Login";
   LoginBtn.setAttribute("type", "button");
@@ -79,6 +83,8 @@ const setUpNav = async () => {
   RegisterBtn.setAttribute("onclick", 'location.href="./register.html"');
 
   const header = document.getElementById("header");
+
+  header.append(HomeBtn);
   header.append(RegisterBtn);
   header.append(LoginBtn);
 };

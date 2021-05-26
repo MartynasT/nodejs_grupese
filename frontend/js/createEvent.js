@@ -7,11 +7,21 @@ window.addEventListener('DOMContentLoaded', ()=>{
   console.log('veikia')
   user = localStorage.getItem('user');
   token = localStorage.getItem('eventauth')
-  if (!token) {
+  user = JSON.parse(localStorage.getItem('user'))
+
+  if(!user){
+    user = {
+     role: 'guest',
+   }
+   localStorage.setItem('user',JSON.stringify(user) )
+ }
+
+
+  if (user.role != "admin" ) {
     window.location.href='./index.html'
   }
 
-  user = JSON.parse(localStorage.getItem('user'))
+
 
 })
 
@@ -27,7 +37,7 @@ document.getElementById('eventForm').addEventListener('submit', async(e)=>{
   let eventLocation = document.getElementById('eventLocation').value;
   let content = document.getElementById('eventInfo').value;
   let eventCategory = document.getElementById('eventCategory').value;
-
+console.log(eventCategory)
   if(!content && !eventDate && !eventTitle && !eventLocation) alert('Provide content')
 
   if (eventImage.files !== 0 ){
