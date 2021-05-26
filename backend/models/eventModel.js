@@ -30,6 +30,10 @@ const eventSchema = new mongoose.Schema(
       required: true,
       ref: 'User'
     },
+    active: {
+      type: Boolean,
+      default: true
+    }
   },
   {
     toJSON: {
