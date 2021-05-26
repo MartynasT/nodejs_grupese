@@ -46,13 +46,117 @@ const showEvent = (event) =>{
   let eventTitle = document.getElementById('eventTitle');
   let description = document.querySelector('.event--body p');
   let category = document.querySelector('.event-category span');
+  let tickets = document.querySelector('.tickets-left');
+  let price = document.querySelector('.tickets-price');
+
+  let buyTicketBtn = document.getElementById('buyTicketBtn');
+  buyTicketBtn.addEventListener('click', ()=>{
+    showTicketModal(event)
+  })
+
   category.innerText = event.category
 
   description.innerText = event.eventContent;
   title.innerText = event.title;
   eventTitle.innerText = event.title;
   heroImg.style.backgroundImage =  `url(${event.eventImage})`;
+  tickets.innerText = event.tickets;
+  price.innerText = event.price;
 }
+
+const showTicketModal = (event) =>{
+  const div = document.createElement("div");
+  div.classList.add("edit-modal");
+
+  const h3 = document.createElement('h3');
+  h3.classList.add('title');
+  h3.innerText = event.title;
+
+  let userName = `
+    <div class="input-wrapper">
+        <label for="userName">Enter your name</label>
+        <input type="text" id="userName">
+    </div>`;
+
+  let userEmail = `
+    <div class="input-wrapper">
+        <label for="userEmail">Enter your email</label>
+        <input type="email" id="userEmail">
+    </div>`;
+
+  let buttonCancel = document.createElement("button");
+  buttonCancel.classList.add("btn", "btn-danger");
+  buttonCancel.innerText = "Cancel";
+
+  let buttonBuy = document.createElement("button");
+  buttonBuy.classList.add("btn", "btn-primary");
+  buttonBuy.innerText = `Buy ${event.price}eur.`;
+
+  buttonCancel.addEventListener("click", () => {
+    div.remove();
+  });
+
+  buttonBuy.addEventListener('click', ()=>{
+    let userName = document.getElementById('userName').value;
+    let userEmail = document.getElementById('userEmail').value;
+
+    if (!userName && !userEmail){
+      alert('Fill form')
+    }else{
+      processPayment(event, div, userName, userEmail);
+    }
+  })
+
+  div.appendChild(h3)
+  div.innerHTML += userName + userEmail;
+  div.appendChild(buttonCancel)
+  div.appendChild(buttonBuy)
+
+  document.querySelector("body").appendChild(div);
+}
+
+const processPayment = async (event, el, name, email) =>{
+  let tickets = document.querySelector('.tickets-left');
+  tickets.innerText = Number(tickets.innerText) -1;
+
+  let body = {
+    id: event._id
+  };
+  try {
+    let response = await fetch(`${url}/buyTicket`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    if(response.status !== 200) throw await response.json()
+
+
+    let ticket = await response.json();
+
+    let buyer = {
+      name,
+      email,
+      event: event.title,
+      eventDate: event.eventDate
+    }
+
+    localStorage.setItem('buyer', JSON.stringify(buyer));
+    window.location.href = './thanks.html';
+
+  }catch (e){
+    console.log(e)
+    alert(e)
+  }
+
+
+  el.remove();
+
+
+}
+
 
 const getOrgEvents = async (orgId) =>{
   let body = {
