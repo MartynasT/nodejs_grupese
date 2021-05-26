@@ -20,48 +20,53 @@ const showAllEvents = (items) => {
   user = JSON.parse(localStorage.getItem("user"));
   const eventsHolder = document.querySelector(".all-events");
   if (events.length === 0) {
-    let error = document.createElement("p");
-    error.innerText = "No events.";
-    eventsHolder.appendChild(error);
   } else {
     userData = JSON.parse(localStorage.getItem("user"));
 
     userSavedEvents = userData.savedEvent;
-    items.forEach((item) => {
-      if (userData.savedEvent.includes(item._id)) {
-        let savedClass = "";
-        if (userSavedEvents.includes(item._id)) {
-          savedClass = "saved";
-        }
-        let card = `
-          <article class="event event-small" id="card">
-              <div class="event-image" style="background-image: url('${item.eventImage}')">
-                <h2>${item.title}</h2>
-              </div>
-              <div class="event--body">
-                  <div class="event--info d-flex-justify-between">
-                      <div class="event--date"><span>Date:</span>${item.eventDate}</div>
-                      <div class="save-event ${savedClass}" onclick="saveEvent(this, '${item._id}')" >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-                      </div>
-                  </div>
-                <p>
-                 ${item.eventContent}
-                </p>
-                <div class="event-location">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                    <span>${item.location}</span>
-                </div>
-                <div class="event-category">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-                    <span>${item.category}</span>
-                </div>
-              </div>
-            </article>`;
 
-        eventsHolder.innerHTML += card;
-      }
-    });
+    if (userSavedEvents.length === 0) {
+      console.log(userSavedEvents.length);
+      let error = document.createElement("p");
+      error.innerText = "No saved events.";
+      eventsHolder.appendChild(error);
+    } else {
+      items.forEach((item) => {
+        if (userData.savedEvent.includes(item._id)) {
+          let savedClass = "";
+          if (userSavedEvents.includes(item._id)) {
+            savedClass = "saved";
+          }
+          let card = `
+            <article class="event event-small" id="card">
+                <div class="event-image" style="background-image: url('${item.eventImage}')">
+                  <h2>${item.title}</h2>
+                </div>
+                <div class="event--body">
+                    <div class="event--info d-flex-justify-between">
+                        <div class="event--date"><span>Date:</span>${item.eventDate}</div>
+                        <div class="save-event ${savedClass}" onclick="saveEvent(this, '${item._id}')" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                        </div>
+                    </div>
+                  <p>
+                   ${item.eventContent}
+                  </p>
+                  <div class="event-location">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                      <span>${item.location}</span>
+                  </div>
+                  <div class="event-category">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                      <span>${item.category}</span>
+                  </div>
+                </div>
+              </article>`;
+
+          eventsHolder.innerHTML += card;
+        }
+      });
+    }
   }
 };
 
