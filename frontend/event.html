@@ -23,14 +23,14 @@
     <main>
       <div class="hero" style="background-image: url(image2.jpg)">
         <div class="hero-event-info">
-          <h2>Event title</h2>
+          <h1>Event title</h1>
           <div class="event-date"><span>Date:</span>2021-05-12</div>
         </div>
       </div>
       <div class="container">
         <div class="event-info d-flex flex-column align-center">
           <article class="event event--big">
-            <h2>Event title</h2>
+            <h2 id="eventTitle">Event title</h2>
             <div class="event--body">
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
@@ -45,11 +45,9 @@
           <div class="create-box w-580">
             <h5>Event categories:</h5>
             <div class="d-flex">
-              <div class="btn bg-light-blue font-white" id="eventMusic">
-                Music event
-              </div>
-              <div class="btn bg-light-blue font-white ml-15" id="eventFamily">
-                Family event
+              <div class="event-category">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+                <span>category</span>
               </div>
             </div>
           </div>
@@ -58,87 +56,12 @@
         <div class="p-80">
           <h2>Other organizator events:</h2>
           <div class="all-events">
-            <article class="event event-small">
-              <div class="event-image" style="background-image: url(image.jpg)">
-                <h2>Event title</h2>
-              </div>
-              <div class="event--body">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-                  sed fuga nemo veniam praesentium error doloribus delectus,
-                  numquam obcaecati sapiente magnam dicta quibusdam harum
-                  ducimus architecto laudantium perspiciatis nostrum ex modi,
-                  iste voluptas alias, odit reiciendis? Temporibus, sapiente.
-                  Officiis, blanditiis!
-                </p>
-                <div class="event--info"><span>Date:</span>2021-05-12</div>
-              </div>
-            </article>
-            <article class="event event-small">
-              <div class="event-image" style="background-image: url(image.jpg)">
-                <h2>Event title</h2>
-              </div>
-              <div class="event--body">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-                  sed fuga nemo veniam praesentium error doloribus delectus,
-                  numquam obcaecati sapiente magnam dicta quibusdam harum
-                  ducimus architecto laudantium perspiciatis nostrum ex modi,
-                  iste voluptas alias, odit reiciendis? Temporibus, sapiente.
-                  Officiis, blanditiis!
-                </p>
-                <div class="event--info"><span>Date:</span>2021-05-12</div>
-              </div>
-            </article>
-            <article class="event event-small">
-              <div class="event-image" style="background-image: url(image.jpg)">
-                <h2>Event title</h2>
-              </div>
-              <div class="event--body">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-                  sed fuga nemo veniam praesentium error doloribus delectus,
-                  numquam obcaecati sapiente magnam dicta quibusdam harum
-                  ducimus architecto laudantium perspiciatis nostrum ex modi,
-                  iste voluptas alias, odit reiciendis? Temporibus, sapiente.
-                  Officiis, blanditiis!
-                </p>
-                <div class="event--info"><span>Date:</span>2021-05-12</div>
-              </div>
-            </article>
-            <article class="event event-small">
-              <div class="event-image" style="background-image: url(image.jpg)">
-                <h2>Event title</h2>
-              </div>
-              <div class="event--body">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-                  sed fuga nemo veniam praesentium error doloribus delectus,
-                  numquam obcaecati sapiente magnam dicta quibusdam harum
-                  ducimus architecto laudantium perspiciatis nostrum ex modi,
-                  iste
-                </p>
-                <div class="event--info"><span>Date:</span>2021-05-12</div>
-              </div>
-            </article>
-            <article class="event event-small">
-              <div class="event-image" style="background-image: url(image.jpg)">
-                <h2>Event title</h2>
-              </div>
-              <div class="event--body">
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-                  sed fuga nemo veniam praesentium error doloribus delectus,
-                  numquam obcaecati sapiente magnam dicta quibusdam harum
-                  ducimus architecto laudantium perspiciatis nostrum ex modi,
-                </p>
-                <div class="event--info"><span>Date:</span>2021-05-12</div>
-              </div>
-            </article>
+
           </div>
         </div>
       </div>
     </main>
     <script src="./js/main.js"></script>
+    <script src="./js/event.js"></script>
   </body>
 </html>
