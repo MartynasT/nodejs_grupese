@@ -104,3 +104,9 @@ const logOut = async () => {
 
   window.location.href = "./login.html";
 };
+
+const goToEvent = (eventId) =>{
+  localStorage.setItem('EventId', eventId);
+
+  window.location = './event.html'
+}
