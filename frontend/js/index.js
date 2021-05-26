@@ -179,12 +179,6 @@ const updateUserLocalStorage = (id) => {
   console.log(user);
 };
 
-const goToEvent = (eventId) => {
-  localStorage.setItem("EventId", eventId);
-
-  window.location = "./event.html";
-};
-
 const categoryList = document.querySelectorAll(".category");
 categoryList.forEach((el) => {
   el.addEventListener("click", function () {
