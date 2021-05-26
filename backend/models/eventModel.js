@@ -33,6 +33,14 @@ const eventSchema = new mongoose.Schema(
     active: {
       type: Boolean,
       default: true
+    },
+    tickets: {
+      type: Number,
+      default: 100
+    },
+    price: {
+      type: Number,
+      default: 0
     }
   },
   {

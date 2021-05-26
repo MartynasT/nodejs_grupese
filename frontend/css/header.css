@@ -12,6 +12,10 @@ header a {
   border: 1px solid white;
   color: white;
 }
+header a:hover {
+  background: white;
+  color: #203656;
+}
 
 header button {
   text-decoration: none;
@@ -24,6 +28,12 @@ header button {
   border: 1px solid white;
   color: #203656;
 }
+
+header button:hover {
+  background: #203656;
+  color: white;
+}
+
 .dark-btn {
   text-decoration: none;
   padding: 8px 30px;
@@ -37,4 +47,38 @@ header button {
 
 .m20 {
   margin-right: 20%;
+}
+
+#readMore {
+  border: none;
+  background: none;
+  text-decoration: underline;
+  cursor: pointer;
+  color: brown;
+}
+.name {
+  font-weight: 400;
+  margin-top: 30px;
+}
+
+.center {
+  text-align: center;
+}
+.m-20 {
+  margin-left: 20px;
+}
+.p-top {
+  padding-top: 80px;
+}
+.category:hover {
+  background-color: rgb(32, 54, 86, 0.2);
+}
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.m-b-20 {
+  margin-bottom: 20px;
 }

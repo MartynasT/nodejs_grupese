@@ -46,13 +46,117 @@ const showEvent = (event) =>{
   let eventTitle = document.getElementById('eventTitle');
   let description = document.querySelector('.event--body p');
   let category = document.querySelector('.event-category span');
+  let tickets = document.querySelector('.tickets-left');
+  let price = document.querySelector('.tickets-price');
+
+  let buyTicketBtn = document.getElementById('buyTicketBtn');
+  buyTicketBtn.addEventListener('click', ()=>{
+    showTicketModal(event)
+  })
+
   category.innerText = event.category
 
   description.innerText = event.eventContent;
   title.innerText = event.title;
   eventTitle.innerText = event.title;
   heroImg.style.backgroundImage =  `url(${event.eventImage})`;
+  tickets.innerText = event.tickets;
+  price.innerText = event.price;
 }
+
+const showTicketModal = (event) =>{
+  const div = document.createElement("div");
+  div.classList.add("edit-modal");
+
+  const h3 = document.createElement('h3');
+  h3.classList.add('title');
+  h3.innerText = event.title;
+
+  let userName = `
+    <div class="input-wrapper">
+        <label for="userName">Enter your name</label>
+        <input type="text" id="userName">
+    </div>`;
+
+  let userEmail = `
+    <div class="input-wrapper">
+        <label for="userEmail">Enter your email</label>
+        <input type="email" id="userEmail">
+    </div>`;
+
+  let buttonCancel = document.createElement("button");
+  buttonCancel.classList.add("btn", "btn-danger");
+  buttonCancel.innerText = "Cancel";
+
+  let buttonBuy = document.createElement("button");
+  buttonBuy.classList.add("btn", "btn-primary");
+  buttonBuy.innerText = `Buy ${event.price}eur.`;
+
+  buttonCancel.addEventListener("click", () => {
+    div.remove();
+  });
+
+  buttonBuy.addEventListener('click', ()=>{
+    let userName = document.getElementById('userName').value;
+    let userEmail = document.getElementById('userEmail').value;
+
+    if (!userName && !userEmail){
+      alert('Fill form')
+    }else{
+      processPayment(event, div, userName, userEmail);
+    }
+  })
+
+  div.appendChild(h3)
+  div.innerHTML += userName + userEmail;
+  div.appendChild(buttonCancel)
+  div.appendChild(buttonBuy)
+
+  document.querySelector("body").appendChild(div);
+}
+
+const processPayment = async (event, el, name, email) =>{
+  let tickets = document.querySelector('.tickets-left');
+  tickets.innerText = Number(tickets.innerText) -1;
+
+  let body = {
+    id: event._id
+  };
+  try {
+    let response = await fetch(`${url}/buyTicket`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    if(response.status !== 200) throw await response.json()
+
+
+    let ticket = await response.json();
+
+    let buyer = {
+      name,
+      email,
+      event: event.title,
+      eventDate: event.eventDate
+    }
+
+    localStorage.setItem('buyer', JSON.stringify(buyer));
+    window.location.href = './thanks.html';
+
+  }catch (e){
+    console.log(e)
+    alert(e)
+  }
+
+
+  el.remove();
+
+
+}
+
 
 const getOrgEvents = async (orgId) =>{
   let body = {
@@ -102,6 +206,7 @@ const showAllEvents = (items) => {
                 <p>
                  ${item.eventContent}
                 </p>
+                <button id="readMore" onclick="goToEvent('${item._id}')">Read more...  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button> 
                 <button onclick="goToEvent('${item._id}')">Read more</button>
                 <div class="event-location">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>

@@ -53,6 +53,8 @@ router.route("/updateEvent").post(eventController.updateEvent);
 
 router.route("/cancelEvent").post(eventController.cancelEvent);
 
+router.route('/buyTicket').post(eventController.buyTicket);
+
 // user
 router.route("/user/signUp").post(userController.signUp);
 router.route("/user/signIn").post(userController.signIn);
