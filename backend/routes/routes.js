@@ -31,8 +31,19 @@ router.route("/organizatorEvents")
   .get(authenticateMiddleware.checkUserRole, authenticateMiddleware.authenticate, eventController.getOrganizatorEvents)
 
 
+
 router.route('/getOneEvent')
   .post(eventController.getOneEvent)
+
+<<<<<<< HEAD
+
+router.route('/updateEvent')
+  .post(eventController.updateEvent)
+
+router.route('/cancelEvent')
+  .post(eventController.cancelEvent)
+=======
+>>>>>>> 4d5a5af29685796c1dd12536c494213ed042a075
 // user
 router.route("/user/signUp").post(userController.signUp);
 router.route("/user/signIn").post(userController.signIn);

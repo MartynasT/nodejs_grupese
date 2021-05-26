@@ -52,6 +52,8 @@ const showAllEvents = (items) => {
     let card = `
           <article class="event event-small" >
               <div class="event-image" style="background-image: url('${item.eventImage}')">
+              ${item.active  ? '': '<span class="canceled-event">Event' +
+      ' canceled</span>'}
                 <h2>${item.title}</h2>
               </div>
               <div class="event--body">
