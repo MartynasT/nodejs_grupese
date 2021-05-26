@@ -67,7 +67,7 @@ const showAllEvents = (items) => {
 
 const saveEvent = async (el, eventId) => {
   if (
-    confirm("Are you sure you want to remove this thing from the database?")
+    confirm("Are you sure you want to remove this event from the database?")
   ) {
     el.classList.toggle("saved");
 
@@ -78,9 +78,8 @@ const saveEvent = async (el, eventId) => {
     let body = {
       eventId,
     };
-    console.log("Thing was saved to the database.");
   } else {
-    console.log("Thing was not removed from the database.");
+    console.log("Event was not removed from the database.");
   }
 
   try {
