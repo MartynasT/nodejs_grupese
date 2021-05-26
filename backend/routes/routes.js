@@ -15,25 +15,37 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({
-  storage
+  storage,
 });
 
 // Events
 router
   .route("/event")
-  .post(authenticateMiddleware.checkUserRole, authenticateMiddleware.authenticate, upload.single('image'), eventController.createEvent)
+  .post(
+    authenticateMiddleware.checkUserRole,
+    authenticateMiddleware.authenticate,
+    upload.single("image"),
+    eventController.createEvent
+  )
   .get(eventController.getAllEvents);
 
-router.route("/saveEvent")
-  .post(authenticateMiddleware.authenticate, userController.saveEvent)
+router
+  .route("/saveEvent")
+  .post(authenticateMiddleware.authenticate, userController.saveEvent);
 
-router.route("/organizatorEvents")
-  .get(authenticateMiddleware.checkUserRole, authenticateMiddleware.authenticate, eventController.getOrganizatorEvents)
+router
+  .route("/organizatorEvents")
+  .get(
+    authenticateMiddleware.checkUserRole,
+    authenticateMiddleware.authenticate,
+    eventController.getOrganizatorEvents
+  );
 
+router.route("/getOneEvent").post(eventController.getOneEvent);
 
+router.route("/updateEvent").post(eventController.updateEvent);
 
-router.route('/getOneEvent')
-  .post(eventController.getOneEvent)
+router.route("/cancelEvent").post(eventController.cancelEvent);
 
 // user
 router.route("/user/signUp").post(userController.signUp);
