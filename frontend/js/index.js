@@ -46,8 +46,7 @@ const showAllEvents = (items) => {
   const eventsHolder = document.querySelector(".all-events");
   items.forEach((item, index) => {
     let savedClass = "";
-    if(user.role !== 'guest') {
-
+    if (user.role !== "guest") {
       if (userSavedEvents.includes(item._id)) {
         savedClass = "saved";
       }
@@ -55,15 +54,24 @@ const showAllEvents = (items) => {
 
     let card = `
           <article class="event event-small" >
-              <div class="event-image" style="background-image: url('${item.eventImage}')">
-              ${item.active  ? '': '<span class="canceled-event">Event' +
-      ' canceled</span>'}
+              <div class="event-image" style="background-image: url('${
+                item.eventImage
+              }')">
+              ${
+                item.active
+                  ? ""
+                  : '<span class="canceled-event">Event' + " canceled</span>"
+              }
                 <h2>${item.title}</h2>
               </div>
               <div class="event--body">
                   <div class="event--info d-flex-justify-between">
-                      <div class="event--date"><span>Date:</span>${item.eventDate}</div>
-                      <div class="save-event ${savedClass}" onclick="saveEvent(this, '${item._id}')">
+                      <div class="event--date"><span>Date:</span>${
+                        item.eventDate
+                      }</div>
+                      <div class="save-event ${savedClass}" onclick="saveEvent(this, '${
+      item._id
+    }')">
                           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
                       </div>
                   </div>
@@ -166,19 +174,31 @@ const updateUserLocalStorage = (id) => {
   console.log(userData);
 };
 
-document.getElementById("e-music").addEventListener("click", function () {
-  console.log("veikia");
-  localStorage.setItem("category", "music");
-});
-document.getElementById("e-family").addEventListener("click", function () {
-  console.log("veikia");
-  localStorage.setItem("category", "family");
-});
-document.getElementById("e-art").addEventListener("click", function () {
-  console.log("veikia");
-  localStorage.setItem("category", "art");
-});
-document.getElementById("e-fair").addEventListener("click", function () {
-  console.log("veikia");
-  localStorage.setItem("category", "fair");
+const selectCategory = document.querySelector(".category");
+
+selectCategory.addEventListener("click", function () {
+  console.log(selectCategory.id);
+  switch (selectCategory.id) {
+    case "e-music":
+      localStorage.setItem("category", "music");
+      break;
+    case "e-family":
+      localStorage.setItem("category", "family");
+      break;
+    case "e-comedy":
+      localStorage.setItem("category", "comedy");
+      break;
+    case "e-art":
+      localStorage.setItem("category", "art");
+      break;
+    case "e-fair":
+      localStorage.setItem("category", "fair");
+      break;
+    case "e-conferences":
+      localStorage.setItem("category", "conferences");
+      break;
+    case "e-workshops":
+      localStorage.setItem("category", "workshops");
+      break;
+  }
 });
