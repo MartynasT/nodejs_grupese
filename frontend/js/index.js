@@ -6,14 +6,12 @@ let userData;
 let userSavedEvents;
 
 window.addEventListener("DOMContentLoaded", () => {
-  console.log("veikia");
   // user = localStorage.getItem('user');
   token = localStorage.getItem("eventauth");
 
   user = JSON.parse(localStorage.getItem("user"));
 
   userSavedEvents = user.savedEvent;
-  console.log(userSavedEvents);
   if (!user) {
     user = {
       role: "guest",
@@ -36,7 +34,6 @@ const getAllEvents = async () => {
   });
 
   let events = await response.json();
-  console.log(events);
   showAllEvents(events);
   loadSliderEvents(events);
 };
@@ -44,6 +41,7 @@ const getAllEvents = async () => {
 const showAllEvents = (items) => {
   const bigEventHollder = document.getElementById("bigEventHollder");
   const eventsHolder = document.querySelector(".all-events");
+
   items.forEach((item, index) => {
     let savedClass = "";
     if (user.role !== "guest") {
@@ -52,7 +50,12 @@ const showAllEvents = (items) => {
       }
     }
 
-    let card = `
+    let today = new Date();
+    const eventDate = new Date(item.eventDate);
+    const todayDate = new Date(today);
+
+    if (eventDate - todayDate > 0) {
+      let card = `
           <article class="event event-small" >
               <div class="event-image" style="background-image: url('${
                 item.eventImage
@@ -70,8 +73,8 @@ const showAllEvents = (items) => {
                         item.eventDate
                       }</div>
                       <div class="save-event ${savedClass}" onclick="saveEvent(this, '${
-      item._id
-    }')">
+        item._id
+      }')">
                           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
                       </div>
                   </div>
@@ -89,10 +92,11 @@ const showAllEvents = (items) => {
                 </div>
               </div>
             </article>`;
-    if (index > 0) {
-      eventsHolder.innerHTML += card;
-    } else {
-      bigEventHollder.innerHTML += card;
+      if (index > 0) {
+        eventsHolder.innerHTML += card;
+      } else {
+        bigEventHollder.innerHTML += card;
+      }
     }
   });
 };
@@ -175,40 +179,16 @@ const updateUserLocalStorage = (id) => {
   console.log(user);
 };
 
+const goToEvent = (eventId) => {
+  localStorage.setItem("EventId", eventId);
 
-const goToEvent = (eventId) =>{
-  localStorage.setItem('EventId', eventId);
+  window.location = "./event.html";
+};
 
-  window.location = './event.html'
-}
-
-
-const selectCategory = document.querySelector(".category");
-
-selectCategory.addEventListener("click", function () {
-  console.log(selectCategory.id);
-  switch (selectCategory.id) {
-    case "e-music":
-      localStorage.setItem("category", "music");
-      break;
-    case "e-family":
-      localStorage.setItem("category", "family");
-      break;
-    case "e-comedy":
-      localStorage.setItem("category", "comedy");
-      break;
-    case "e-art":
-      localStorage.setItem("category", "art");
-      break;
-    case "e-fair":
-      localStorage.setItem("category", "fair");
-      break;
-    case "e-conferences":
-      localStorage.setItem("category", "conferences");
-      break;
-    case "e-workshops":
-      localStorage.setItem("category", "workshops");
-      break;
-  }
-
+const categoryList = document.querySelectorAll(".category");
+categoryList.forEach((el) => {
+  el.addEventListener("click", function () {
+    let type = el.getAttribute("data-category");
+    localStorage.setItem("category", type);
+  });
 });
