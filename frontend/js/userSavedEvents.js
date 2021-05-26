@@ -1,25 +1,9 @@
 let url = "http://localhost:3000/api/v1";
-let token;
-
-let userData;
-let userSavedEvents;
+let category = localStorage.getItem("category");
+let events;
 
 window.addEventListener("DOMContentLoaded", () => {
-  console.log("veikia");
-  // user = localStorage.getItem('user');
   token = localStorage.getItem("eventauth");
-
-  userData = JSON.parse(localStorage.getItem("user"));
-
-  userSavedEvents = userData.savedEvent;
-  console.log(userSavedEvents);
-  // if (!token) {
-  //   window.location.href='./login.html'
-  // }
-  //
-  // user = JSON.parse(localStorage.getItem('user'))
-  //
-  // getAllTweets();
   getAllEvents();
 });
 
@@ -28,30 +12,36 @@ const getAllEvents = async () => {
     method: "GET",
   });
 
-  let events = await response.json();
-  console.log(events);
+  events = await response.json();
   showAllEvents(events);
-  loadSliderEvents(events);
 };
 
 const showAllEvents = (items) => {
-  const bigEventHollder = document.getElementById("bigEventHollder");
+  user = JSON.parse(localStorage.getItem("user"));
   const eventsHolder = document.querySelector(".all-events");
-  items.forEach((item, index) => {
-    let savedClass = "";
-    if (userSavedEvents.includes(item._id)) {
-      savedClass = "saved";
-    }
+  if (events.length === 0) {
+    let error = document.createElement("p");
+    error.innerText = "No events.";
+    eventsHolder.appendChild(error);
+  } else {
+    userData = JSON.parse(localStorage.getItem("user"));
 
-    let card = `
-          <article class="event event-small" >
+    userSavedEvents = userData.savedEvent;
+    items.forEach((item) => {
+      if (userData.savedEvent.includes(item._id)) {
+        let savedClass = "";
+        if (userSavedEvents.includes(item._id)) {
+          savedClass = "saved";
+        }
+        let card = `
+          <article class="event event-small" id="card">
               <div class="event-image" style="background-image: url('${item.eventImage}')">
                 <h2>${item.title}</h2>
               </div>
               <div class="event--body">
                   <div class="event--info d-flex-justify-between">
                       <div class="event--date"><span>Date:</span>${item.eventDate}</div>
-                      <div class="save-event ${savedClass}" onclick="saveEvent(this, '${item._id}')">
+                      <div class="save-event ${savedClass}" onclick="saveEvent(this, '${item._id}')" >
                           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
                       </div>
                   </div>
@@ -68,55 +58,31 @@ const showAllEvents = (items) => {
                 </div>
               </div>
             </article>`;
-    if (index > 0) {
-      eventsHolder.innerHTML += card;
-    } else {
-      bigEventHollder.innerHTML += card;
-    }
-  });
-};
 
-const loadSliderEvents = (events) => {
-  const swiperWrapper = document.querySelector(".swiper-wrapper");
-  events.forEach((item, index) => {
-    if (index < 3) {
-      let card = `
-        <div class="swiper-slide" style="background-image: url('${item.eventImage}')">
-            <div class="container" >
-                <h2 class="title">${item.title}</h2>
-            </div>
-          </div>
-          `;
-      swiperWrapper.innerHTML += card;
-    } else {
-      const swiper = new Swiper(".swiper-container", {
-        // Optional parameters
-        direction: "horizontal",
-        loop: true,
-
-        // If we need pagination
-        pagination: {
-          el: ".swiper-pagination",
-        },
-
-        // Navigation arrows
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      });
-    }
-  });
+        eventsHolder.innerHTML += card;
+      }
+    });
+  }
 };
 
 const saveEvent = async (el, eventId) => {
-  el.classList.toggle("saved");
+  if (
+    confirm("Are you sure you want to remove this thing from the database?")
+  ) {
+    el.classList.toggle("saved");
 
-  updateUserLocalStorage(eventId);
+    updateUserLocalStorage(eventId);
+    const eventsHolder = document.querySelector(".all-events");
+    eventsHolder.innerHTML = "";
+    getAllEvents();
+    let body = {
+      eventId,
+    };
+    console.log("Thing was saved to the database.");
+  } else {
+    console.log("Thing was not removed from the database.");
+  }
 
-  let body = {
-    eventId,
-  };
   try {
     let response = await fetch(`${url}/saveEvent`, {
       method: "POST",
@@ -127,17 +93,9 @@ const saveEvent = async (el, eventId) => {
       body: JSON.stringify(body),
     });
     let data = await response.json();
-    console.log(data);
-    // console.log(response.json())
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) {}
 };
-
 const updateUserLocalStorage = (id) => {
-  console.log("event id :", id);
-  console.log("user data:", userData);
-
   if (userData.savedEvent.includes(id)) {
     userData.savedEvent = userData.savedEvent.filter((event) => {
       if (event !== id) {
@@ -145,28 +103,8 @@ const updateUserLocalStorage = (id) => {
       }
     });
   } else {
-    console.log("doesn exists");
     userData.savedEvent.push(id);
   }
 
   localStorage.setItem("user", JSON.stringify(userData));
-
-  console.log(userData);
 };
-
-document.getElementById("e-music").addEventListener("click", function () {
-  console.log("veikia");
-  localStorage.setItem("category", "music");
-});
-document.getElementById("e-family").addEventListener("click", function () {
-  console.log("veikia");
-  localStorage.setItem("category", "family");
-});
-document.getElementById("e-art").addEventListener("click", function () {
-  console.log("veikia");
-  localStorage.setItem("category", "art");
-});
-document.getElementById("e-fair").addEventListener("click", function () {
-  console.log("veikia");
-  localStorage.setItem("category", "fair");
-});
