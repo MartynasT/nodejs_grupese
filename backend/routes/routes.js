@@ -41,6 +41,12 @@ router
     eventController.getOrganizatorEvents
   );
 
+router
+.route("/organizatorEventsForPage")
+.post(
+  eventController.getOrganizatorEventsForEventPage
+);
+
 router.route("/getOneEvent").post(eventController.getOneEvent);
 
 router.route("/updateEvent").post(eventController.updateEvent);
