@@ -33,7 +33,14 @@ const getOrganizatorEvents = async (req, res) => {
   res.send(events);
 };
 
+const getOrganizatorEventsForEventPage = async (req, res) => {
+
+  let events = await Event.find({ userId: req.body.id }).sort("eventDate");
+  res.send(events);
+};
+
 const getOneEvent = async (req, res) => {
+
   let event = await Event.find({ _id: await req.body.id });
   res.send(event);
 };
@@ -95,4 +102,5 @@ module.exports = {
   updateEvent,
   cancelEvent,
   getOneEvent,
+  getOrganizatorEventsForEventPage
 };

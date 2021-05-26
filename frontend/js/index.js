@@ -10,9 +10,9 @@ window.addEventListener("DOMContentLoaded", () => {
   // user = localStorage.getItem('user');
   token = localStorage.getItem("eventauth");
 
-  userData = JSON.parse(localStorage.getItem("user"));
+  user = JSON.parse(localStorage.getItem("user"));
 
-  userSavedEvents = userData.savedEvent;
+  userSavedEvents = user.savedEvent;
   console.log(userSavedEvents);
   if (!user) {
     user = {
@@ -70,6 +70,7 @@ const showAllEvents = (items) => {
                 <p>
                  ${item.eventContent}
                 </p>
+                <button onclick="goToEvent('${item._id}')">Read more</button>
                 <div class="event-location">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                     <span>${item.location}</span>
@@ -148,23 +149,31 @@ const saveEvent = async (el, eventId) => {
 
 const updateUserLocalStorage = (id) => {
   console.log("event id :", id);
-  console.log("user data:", userData);
+  console.log("user data:", user);
 
-  if (userData.savedEvent.includes(id)) {
-    userData.savedEvent = userData.savedEvent.filter((event) => {
+  if (user.savedEvent.includes(id)) {
+    user.savedEvent = user.savedEvent.filter((event) => {
       if (event !== id) {
         return event;
       }
     });
   } else {
     console.log("doesn exists");
-    userData.savedEvent.push(id);
+    user.savedEvent.push(id);
   }
 
-  localStorage.setItem("user", JSON.stringify(userData));
+  localStorage.setItem("user", JSON.stringify(user));
 
-  console.log(userData);
+  console.log(user);
 };
+
+const goToEvent = (eventId) =>{
+  localStorage.setItem('EventId', eventId);
+
+  window.location = './event.html'
+}
+
+
 
 document.getElementById("e-music").addEventListener("click", function () {
   console.log("veikia");
