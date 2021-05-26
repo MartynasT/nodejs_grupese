@@ -1,7 +1,6 @@
 window.addEventListener("DOMContentLoaded", () => {
   token = localStorage.getItem("eventauth");
   let user;
-<<<<<<< Updated upstream
   // if (!token) return window.location.href = './login.html'
 
   user = JSON.parse(localStorage.getItem("user"));
@@ -14,12 +13,6 @@ window.addEventListener("DOMContentLoaded", () => {
     };
     localStorage.setItem("user", JSON.stringify(user));
   }
-=======
-  if (!token) return (window.location.href = "./login.html");
-
-  user = JSON.parse(localStorage.getItem("user"));
-  console.log(user.role);
->>>>>>> Stashed changes
 
   if (user.role == "basic") {
     setUpNavBasic();
@@ -33,12 +26,7 @@ window.addEventListener("DOMContentLoaded", () => {
 const setUpNavBasic = async () => {
   const HomeBtn = document.createElement("a");
   HomeBtn.innerText = "Home";
-<<<<<<< Updated upstream
   HomeBtn.href = "./index.html";
-=======
-  HomeBtn.href = "./";
-
->>>>>>> Stashed changes
   const SavedEventsBtn = document.createElement("a");
   SavedEventsBtn.innerText = "Saved events";
   SavedEventsBtn.href = "./userSavedEvents.html";
