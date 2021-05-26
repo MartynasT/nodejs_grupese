@@ -179,11 +179,6 @@ const updateUserLocalStorage = (id) => {
   console.log(user);
 };
 
-const goToEvent = (eventId) => {
-  localStorage.setItem("EventId", eventId);
-
-
-
 const selectCategory = document.querySelector(".category");
 
 selectCategory.addEventListener("click", function () {
@@ -211,12 +206,13 @@ selectCategory.addEventListener("click", function () {
       localStorage.setItem("category", "workshops");
       break;
   }
+  })
 
-
-const categoryList = document.querySelectorAll(".category");
-categoryList.forEach((el) => {
-  el.addEventListener("click", function () {
-    let type = el.getAttribute("data-category");
-    localStorage.setItem("category", type);
+  const categoryList = document.querySelectorAll(".category");
+  categoryList.forEach((el) => {
+    el.addEventListener("click", function () {
+      let type = el.getAttribute("data-category");
+      localStorage.setItem("category", type);
+    });
   });
-});
+
