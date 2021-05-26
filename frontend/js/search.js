@@ -61,6 +61,12 @@ document.getElementById("eventFamily").addEventListener("click", function () {
   document.querySelector(".all-events").innerHTML = "";
   getAllEvents();
 });
+document.getElementById("eventComedy").addEventListener("click", function () {
+  localStorage.setItem("category", "comedy");
+  category = localStorage.getItem("category");
+  document.querySelector(".all-events").innerHTML = "";
+  getAllEvents();
+});
 document.getElementById("eventArt").addEventListener("click", function () {
   localStorage.setItem("category", "art");
   category = localStorage.getItem("category");
@@ -69,6 +75,18 @@ document.getElementById("eventArt").addEventListener("click", function () {
 });
 document.getElementById("eventFair").addEventListener("click", function () {
   localStorage.setItem("category", "fair");
+  category = localStorage.getItem("category");
+  document.querySelector(".all-events").innerHTML = "";
+  getAllEvents();
+});
+document.getElementById("eventConferences").addEventListener("click", function () {
+  localStorage.setItem("category", "conferences");
+  category = localStorage.getItem("category");
+  document.querySelector(".all-events").innerHTML = "";
+  getAllEvents();
+});
+document.getElementById("eventWorkshops").addEventListener("click", function () {
+  localStorage.setItem("category", "workshops");
   category = localStorage.getItem("category");
   document.querySelector(".all-events").innerHTML = "";
   getAllEvents();

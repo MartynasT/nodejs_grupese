@@ -1,7 +1,7 @@
 const Event = require("../models/eventModel");
 
 const getAllEvents = async (req, res) => {
-  const allEvents = await Event.find();
+  const allEvents = await Event.find().sort('-eventDate').populate('userId');
   res.send(allEvents);
 };
 
@@ -18,6 +18,7 @@ const createEvent = async (req, res) => {
       eventImage: relPath,
       category: req.body.category,
       location: req.body.eventLocation,
+      userId: req.user._id,
 
     });
 
@@ -28,7 +29,22 @@ const createEvent = async (req, res) => {
   }
 };
 
+
+const getOrganizatorEvents = async (req, res) =>{
+  let events = await Event.find({userId: req.user._id}).sort('-eventDate');
+  res.send(events);
+}
+
+
+const getOneEvent = async (req, res) =>{
+  let event = await Event.find({_id: await req.body.id})
+  res.send(event)
+}
+
 module.exports = {
   getAllEvents,
   createEvent,
+  getOrganizatorEvents,
+  getOneEvent
+n
 };
