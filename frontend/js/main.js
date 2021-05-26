@@ -1,49 +1,47 @@
-window.addEventListener('DOMContentLoaded', () => {
-  token = localStorage.getItem('eventauth')
+window.addEventListener("DOMContentLoaded", () => {
+  token = localStorage.getItem("eventauth");
   let user;
   // if (!token) return window.location.href = './login.html'
 
-user = JSON.parse(localStorage.getItem('user'))
-  console.log(user)
-// console.log(user.role)
+  user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
+  // console.log(user.role)
 
-  if(!user){
-     user = {
-      role: 'guest',
-    }
-    localStorage.setItem('user',JSON.stringify(user) )
+  if (!user) {
+    user = {
+      role: "guest",
+    };
+    localStorage.setItem("user", JSON.stringify(user));
   }
 
-if(user.role == "basic") {
-    setUpNavBasic()
-} else if (user.role =="admin") {
-    setUpNavAdmin()
-} else {
-  setUpNav()
-}
-})
+  if (user.role == "basic") {
+    setUpNavBasic();
+  } else if (user.role == "admin") {
+    setUpNavAdmin();
+  } else {
+    setUpNav();
+  }
+});
 
 const setUpNavBasic = async () => {
+  const HomeBtn = document.createElement("a");
+  HomeBtn.innerText = "Home";
+  HomeBtn.href = "./index.html";
+  const SavedEventsBtn = document.createElement("a");
+  SavedEventsBtn.innerText = "Saved events";
+  SavedEventsBtn.href = "./userSavedEvents.html";
 
-  const HomeBtn = document.createElement('a')
-  HomeBtn.innerText="Home"
-  HomeBtn.href="./index.html"
-  const SavedEventsBtn = document.createElement('a')
-  SavedEventsBtn.innerText="Saved events"
-  SavedEventsBtn.href="./userSavedEvents.html" 
-  
-  const LogOutBtn = document.createElement('button')
-  LogOutBtn.innerText="Log out"
-  LogOutBtn.setAttribute("type", "button")
-  LogOutBtn.setAttribute("onclick", "logOut()")
-  LogOutBtn.classList.add=("navBtn")
+  const LogOutBtn = document.createElement("button");
+  LogOutBtn.innerText = "Log out";
+  LogOutBtn.setAttribute("type", "button");
+  LogOutBtn.setAttribute("onclick", "logOut()");
+  LogOutBtn.classList.add = "navBtn";
 
-  const header = document.getElementById('header')
-  header.append(HomeBtn)
-  header.append(SavedEventsBtn)
-  header.append(LogOutBtn)
-
-}
+  const header = document.getElementById("header");
+  header.append(HomeBtn);
+  header.append(SavedEventsBtn);
+  header.append(LogOutBtn);
+};
 const setUpNavAdmin = async () => {
 
   const CreatedEventsBtn = document.createElement('a')
@@ -102,16 +100,15 @@ const setUpNavAdmin = async () => {
 const logOut = async () => {
   let url = "http://localhost:3000/api/v1";
   let response = await fetch(`${url}/user/logOut`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
-      'eventauth': token
-    }
-  })
+      "Content-Type": "application/json",
+      eventauth: token,
+    },
+  });
 
-  localStorage.removeItem('eventauth')
-  localStorage.removeItem('user')
+  localStorage.removeItem("eventauth");
+  localStorage.removeItem("user");
 
-  window.location.href = './login.html'
-
-}
+  window.location.href = "./login.html";
+};

@@ -6,16 +6,13 @@ let userSavedEvents;
 
 window.addEventListener("DOMContentLoaded", () => {
   console.log("veikia");
-  user = localStorage.getItem('user');
-  // token = localStorage.getItem("eventauth");
+  // user = localStorage.getItem('user');
+  token = localStorage.getItem("eventauth");
 
   userData = JSON.parse(localStorage.getItem("user"));
 
-  if (userData){
-    userSavedEvents = userData.savedEvent;
-    console.log(userSavedEvents);
-  }
-
+  userSavedEvents = userData.savedEvent;
+  console.log(userSavedEvents);
   // if (!token) {
   //   window.location.href='./login.html'
   // }
@@ -41,12 +38,9 @@ const showAllEvents = (items) => {
   const bigEventHollder = document.getElementById("bigEventHollder");
   const eventsHolder = document.querySelector(".all-events");
   items.forEach((item, index) => {
-
     let savedClass = "";
-    if (userData.role !== 'guest'){
-      if (userSavedEvents.includes(item._id)) {
-        savedClass = "saved";
-      }
+    if (userSavedEvents.includes(item._id)) {
+      savedClass = "saved";
     }
 
     let card = `
@@ -84,11 +78,9 @@ const showAllEvents = (items) => {
   });
 };
 
-
-
-const loadSliderEvents = (events) =>{
-  const swiperWrapper = document.querySelector('.swiper-wrapper');
-  events.forEach((item, index)=>{
+const loadSliderEvents = (events) => {
+  const swiperWrapper = document.querySelector(".swiper-wrapper");
+  events.forEach((item, index) => {
     if (index < 3) {
       let card = `
         <div class="swiper-slide" style="background-image: url('${item.eventImage}')">
@@ -98,7 +90,6 @@ const loadSliderEvents = (events) =>{
           </div>
           `;
       swiperWrapper.innerHTML += card;
-
     } else {
       const swiper = new Swiper(".swiper-container", {
         // Optional parameters
@@ -119,7 +110,6 @@ const loadSliderEvents = (events) =>{
     }
   });
 };
-
 
 const saveEvent = async (el, eventId) => {
   el.classList.toggle("saved");
@@ -160,7 +150,9 @@ const updateUserLocalStorage = (id) => {
     console.log("doesn exists");
     userData.savedEvent.push(id);
   }
+
   localStorage.setItem("user", JSON.stringify(userData));
+
   console.log(userData);
 };
 
