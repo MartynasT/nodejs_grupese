@@ -82,3 +82,10 @@ header button:hover {
 .m-b-20 {
   margin-bottom: 20px;
 }
+.hero-event-info h1 {
+  font-size: 30px;
+  color: white;
+}
+.hero-event-info {
+  margin-left: 20px;
+}
