@@ -66,7 +66,7 @@ const showAllEvents = (items) => {
                   ? ""
                   : '<span class="canceled-event">Event' + " canceled</span>"
               }
-                <h2>${item.title}</h2>
+                <h2 id="event-title">${item.title}</h2>
               </div>
               <div class="event--body">
                   <div class="event--info d-flex-justify-between">
