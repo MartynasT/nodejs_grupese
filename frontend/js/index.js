@@ -11,13 +11,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
   user = JSON.parse(localStorage.getItem("user"));
 
-  userSavedEvents = user.savedEvent;
+  // userSavedEvents = user.savedEvent;
   if (!user) {
     user = {
       role: "guest",
     };
     localStorage.setItem("user", JSON.stringify(user));
   }
+  userSavedEvents = user.savedEvent;
   // if (!token) {
   //   window.location.href='./login.html'
   // }
