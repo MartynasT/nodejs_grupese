@@ -180,12 +180,10 @@ const updateUserLocalStorage = (id) => {
   console.log(user);
 };
 
-
-  const categoryList = document.querySelectorAll(".category");
-  categoryList.forEach((el) => {
-    el.addEventListener("click", function () {
-      let type = el.getAttribute("data-category");
-      localStorage.setItem("category", type);
-    });
+const categoryList = document.querySelectorAll(".category");
+categoryList.forEach((el) => {
+  el.addEventListener("click", function () {
+    let type = el.getAttribute("data-category");
+    localStorage.setItem("category", type);
   });
-
+});
