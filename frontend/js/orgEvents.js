@@ -44,7 +44,7 @@ const showOrgEvents = items => {
   items.forEach((item, index) => {
     const eventDate = new Date(item.eventDate);
     const todayDate = new Date(today);
-
+    let excerption = item.eventContent.slice(0, 200) + '...';
     let card = `
           <article class="event event-small" >
               <div class="event-image" style="background-image: url('${
@@ -71,8 +71,9 @@ const showOrgEvents = items => {
 
                   </div>
                 <p>
-                 ${item.eventContent}
+                 ${excerption}
                 </p>
+                <button id="readMore" onclick="goToEvent('${item._id}')">Read more...  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
                 <div class="event-location">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                     <span>${item.location}</span>

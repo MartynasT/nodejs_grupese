@@ -19,20 +19,26 @@
       rel="stylesheet"
     />
     <title>Document</title>
+    <style>
+      .subtitle{
+        font-size: 24px;
+        font-weight: 500;
+      }
+    </style>
   </head>
   <body>
     <header id="header" class="d-flex justify-end align-center"></header>
 
     <main>
       <div class="container">
-        <h2 class="center mb-2 p-top">Created events:</h2>
-        <div class="p-80 center">
-          <h4>Future / Active events:</h4>
+        <h2 class="center mb-2 p-top center title">Created events:</h2>
+        <div class="p-80 ">
+          <h4 class="center subtitle">Future / Active events:</h4>
           <div class="all-events"></div>
         </div>
       </div>
       <div class="container">
-        <h4 class="center">Past / Canceled events:</h4>
+        <h4 class="center subtitle">Past / Canceled events:</h4>
         <div class="all-events past-events"></div>
       </div>
     </main>
