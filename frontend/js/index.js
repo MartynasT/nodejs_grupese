@@ -38,12 +38,13 @@ const getAllEvents = async () => {
   let events = await response.json();
   let today = new Date();
   const todayDate = new Date(today);
+
   let futureEvents = events.filter(event=>{
     const eventDate = new Date(event.eventDate);
     if (eventDate - todayDate > 0){
         return event
     }
-    })
+  })
   showAllEvents(futureEvents);
   loadSliderEvents(futureEvents);
 };

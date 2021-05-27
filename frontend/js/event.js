@@ -212,9 +212,18 @@ const getOrgEvents = async (orgId) => {
   });
 
   let events = await response.json();
+  let today = new Date();
+  const todayDate = new Date(today);
+  let futureEvents = events.filter(event=>{
+    const eventDate = new Date(event.eventDate);
+    if (eventDate - todayDate > 0){
+      return event
+    }
+  })
+
 
   console.log(events);
-  showAllEvents(events);
+  showAllEvents(futureEvents);
 };
 
 const showAllEvents = (items) => {
@@ -226,7 +235,7 @@ const showAllEvents = (items) => {
         savedClass = "saved";
       }
     }
-
+    let excerption = item.eventContent.slice(0, 200) + '...';
     let card = `
           <article class="event event-small" >
               <div class="event-image" style="background-image: url('${item.eventImage}')">
@@ -246,7 +255,7 @@ const showAllEvents = (items) => {
                       </div>
                   </div>
                 <p>
-                 ${item.eventContent}
+                 ${excerption}
                 </p>
                 <button id="readMore" onclick="goToEvent('${item._id}')">Read more...  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button> 
                 

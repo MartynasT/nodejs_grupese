@@ -16,6 +16,36 @@
       rel="stylesheet"
     />
     <title>Document</title>
+    <style>
+      .container{
+        display: block;
+      }
+
+      .margin-auto{
+        margin: auto;
+      }
+
+      #eventTitle{
+        margin-top: 32px;
+        margin-bottom: 24px;
+      }
+
+      .event--body{
+        margin-bottom: 32px;
+      }
+
+      .t-right{
+        text-align: right;
+      }
+
+      #buyTicketBtn{
+        margin-bottom: 12px;
+      }
+
+      .buy-tickets p{
+        margin-bottom: 12px;
+      }
+    </style>
   </head>
   <body>
     <header id="header" class="d-flex justify-end align-center"></header>
@@ -23,21 +53,21 @@
     <main>
       <div class="hero" style="background-image: url(image2.jpg)">
         <div class="hero-event-info">
-          <h1>Event title</h1>
+          <h1 class="title">Event title</h1>
           <div class="event-date"><span>Date:</span>2021-05-12</div>
         </div>
       </div>
       <div class="container">
-        <div class="event-info d-flex flex-column align-center">
-          <article class="event event--big">
-            <h2 id="eventTitle">Event title</h2>
+        <div class="">
+          <article class="event ">
+            <h2 class="title" id="eventTitle">Event title</h2>
             <div class="event--body">
-              <p></p>
+              <p class=" margin-auto"></p>
             </div>
           </article>
 
-          <div class="create-box w-580">
-            <h5>Event category:</h5>
+          <div class="create-box ">
+<!--            <h5>Event category:</h5>-->
             <div class="d-flex">
               <div class="event-category">
                 <svg
@@ -62,7 +92,7 @@
               <div class="save_event"></div>
             </div>
           </div>
-          <div class="buy-tickets">
+          <div class="buy-tickets t-right">
             <button id="buyTicketBtn" class="btn btn-primary">
               Buy Ticket
             </button>
@@ -72,7 +102,7 @@
         </div>
 
         <div class="p-80">
-          <h2>Other organizator events:</h2>
+          <h2 class="title">Other organizator events:</h2>
           <div class="all-events"></div>
         </div>
       </div>
