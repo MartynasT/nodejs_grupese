@@ -212,9 +212,18 @@ const getOrgEvents = async (orgId) => {
   });
 
   let events = await response.json();
+  let today = new Date();
+  const todayDate = new Date(today);
+  let futureEvents = events.filter(event=>{
+    const eventDate = new Date(event.eventDate);
+    if (eventDate - todayDate > 0){
+      return event
+    }
+  })
+
 
   console.log(events);
-  showAllEvents(events);
+  showAllEvents(futureEvents);
 };
 
 const showAllEvents = (items) => {
@@ -226,7 +235,7 @@ const showAllEvents = (items) => {
         savedClass = "saved";
       }
     }
-
+    let excerption = item.eventContent.slice(0, 200) + '...';
     let card = `
           <article class="event event-small" >
               <div class="event-image" style="background-image: url('${
@@ -251,7 +260,7 @@ const showAllEvents = (items) => {
                       </div>
                   </div>
                 <p>
-                 ${item.eventContent}
+                 ${excerption}
                 </p>
                 <button id="readMore" onclick="goToEvent('${
                   item._id
